@@ -14,15 +14,15 @@
                 <img src=".\public\images\SwapMoto.png" alt="Logo" />
             </div>
             <div class="content-up">
-                <p>Garages in 4 Cities</p>
+                <p>Rent a motorcycle by the hour, day, or week - choose the rental period that fits your needs.</p>
             </div>
             <div class="content-down">
-                <p>6 Types of Motorcycles</p>
+                <p>From nimble scooters to powerful touring bikes - find the perfect motorcycle for your riding style.</p>
             </div>
         </div>
 
         <div class="content-middle">
-            <h1>Find nearby garage in your city</h1>
+            <h1>Discover nearby garages and rent your favorite motorcycle in just a few clicks!</h1>
             <div class="slideshow">
                 <img src=".\public\images\mt-07.png" alt="Yamaha MT-07" class="slide active">
                 <img src=".\public\images\triumph.png" alt="Triumph" class="slide">
@@ -39,10 +39,10 @@
                 <button type="button" onclick="location.href='./public/register.php'">Register</button>
             </div>
             <div class="content-up">
-                <p>SwapMoto is a platform that allows you to rent motorcycles from garages in your city.</p>
+                <p>SwapMoto is a user-friendly platform that connects you with garages in your city, making it easy to rent a motorcycle whenever you need one.</p>
             </div>
             <div class="content-down">
-                <p>Our mission is to provide a platform that allows you to rent motorcycles from garages in your city.</p>
+                <p>We aim to provide an effortless motorcycle rental experience, giving you quick access to a wide range of motorcycles in conveniently located garages across multiple cities.</p>
             </div>
         </div>
     </div>
