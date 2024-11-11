@@ -1,10 +1,17 @@
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slideshow .slide');
+const images = [
+    './public/images/warsaw.jpg',
+    './public/images/lodz.jpg',
+    './public/images/gdansk.jpg',
+    './public/images/cracow.jpg',
+];
 
-function showNextSlide() {
-    slides[currentSlide].classList.remove('active');
-    currentSlide = (currentSlide + 1) % slides.length;
-    slides[currentSlide].classList.add('active');
+let currentIndex = 0;
+
+function changeBackground() {
+    const container = document.querySelector('.heroHeader');
+    container.style.backgroundImage = `url(${images[currentIndex]})`;
+    currentIndex = (currentIndex + 1) % images.length;
 }
 
-setInterval(showNextSlide, 3000); 
+setInterval(changeBackground, 5000); 
+window.onload = changeBackground; 
