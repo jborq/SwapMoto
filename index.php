@@ -3,54 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome at SwapMoto</title>
+    <title>Rent a motorcycle at SwapMoto</title>
     <link rel="stylesheet" href="./style.css?v=<?php echo time(); ?>">
 </head>
 <body>
-
-    <div class="content">
-        <div class="content-left">
-            <div class="logo">
-                <img src=".\public\images\SwapMoto.png" alt="Logo" />
-            </div>
-            <div class="content-up">
-                <p>Rent a motorcycle by the hour, day, or week - choose the rental period that fits your needs.</p>
-            </div>
-            <div class="content-down">
-                <p>From nimble scooters to powerful touring bikes - find the perfect motorcycle for your riding style.</p>
-            </div>
-        </div>
-
-        <div class="content-middle">
-            <h1>Discover nearby garages and rent your favorite motorcycle in just a few clicks!</h1>
-            <div class="slideshow">
-                <img src=".\public\images\mt-07.png" alt="Yamaha MT-07" class="slide active">
-                <img src=".\public\images\triumph.png" alt="Triumph" class="slide">
-                <img src=".\public\images\harley.png" alt="Harley" class="slide">
-                <img src=".\public\images\fz6.png" alt="Yamaha FZ6" class="slide">
-            </div>
-            <div class="button">
-                <button type="button" onclick="location.href='./public/login.php'">Get Started</button>
-            </div>
-        </div>
-
-        <div class="content-right">
-            <div class="button">
-                <button type="button" onclick="location.href='./public/register.php'">Register</button>
-            </div>
-            <div class="content-up">
-                <p>SwapMoto is a user-friendly platform that connects you with garages in your city, making it easy to rent a motorcycle whenever you need one.</p>
-            </div>
-            <div class="content-down">
-                <p>We aim to provide an effortless motorcycle rental experience, giving you quick access to a wide range of motorcycles in conveniently located garages across multiple cities.</p>
-            </div>
+    <div class="header-container">
+        <div class="logo">
+            <img src=".\public\images\SwapMoto.png" alt="Logo" />
+        </div> 
+        <div class="header-button">
+            <button type="button" onclick="location.href='./public/login.php'">Login</button>
+            <button type="button" onclick="location.href='./public/register.php'">Register at SwapMoto</button>
         </div>
     </div>
-    <div class="footer">
-        SwapMoto &copy 2024
+    <div class="content-container">
+        <div class="heroHeader">
+            <h1>Discover nearby garages and rent your favorite motorcycle in just a few clicks!</h1>
+            <p>Through SwapMoto you can rent motorcycles directly from dealers or private motorcycle owners in your area. From vintage cars to the newest BMW or Harley-Davidson models. With our motorcycle rentals you always have the same favorable rental conditions and you don't have to pay a deposit in advance. So check out our range of motorcycles for rent in and around your city!</p>
+            <div class="achievement-container">
+                <div class="achievement">
+                    <div class="achievement-title">
+                        <img src="./public/icons/bike_icon.png" alt="Bike Icon" />
+                        1500+
+                    </div>
+                    <div class="achievement-description">
+                        Motorcycles for rent in your neighbourhood
+                    </div>
+                </div>
+                <div class="achievement">
+                    <div class="achievement-title">
+                        <img src="./public/icons/clock_icon.png" alt="Clock Icon" />
+                        24/7
+                    </div>
+                    <div class="achievement-description">
+                        Open and easy online renting
+                    </div>
+                </div>
+                <div class="achievement">
+                    <div class="achievement-title">
+                        <img src="./public/icons/star_icon.png" alt="Bike Icon" />
+                        Affordable
+                    </div>
+                    <div class="achievement-description">
+                        Rental day of 24 hours and >100 km free per day
+                    </div>
+                </div>
+                <div class="achievement">
+                    <div class="achievement-title">
+                        <img src="./public/icons/thumb_icon.png" alt="Bike Icon" />
+                        8.7
+                    </div>
+                    <div class="achievement-description">
+                        The score of other bikers
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="content">
+            fsfsdfsdfsf
+        </div>
+
+    </div>
+    <div class="footer-container">
+        &copy SwapMoto 2024
     </div>
 
     <script src="./src/slideshow.js"></script>
-    
+
 </body>
 </html>
