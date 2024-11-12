@@ -29,6 +29,7 @@ button:hover {
     background-color: #555253;
 }
 
+
 /* Header */
 .header-container {
     display: flex;
@@ -38,7 +39,7 @@ button:hover {
     align-items: center;
     width: 100%;
     max-height: 80px;
-    background-color: #dbeeff;
+    background-color: #E7E4E5;
 }
 
 .logo {
@@ -62,6 +63,7 @@ button:hover {
     padding-right: 150px;
     gap: 40px;
 }
+
 
 /* Content */
 .heroHeader {
@@ -132,6 +134,11 @@ button:hover {
     height: auto;
 }
 
+
+
+
+
+
 /* Moto boxes */
 .content {
     display: flex;
@@ -139,16 +146,81 @@ button:hover {
     justify-content: space-between;
     align-items: center;
     padding: 50px;
-    background-color: #e8f4ff;
+    background-color: #E7E4E5;
 
 }
+
+
+
+
+
+/* Testimonials section */
+.testimonials-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 20px;
+    background-color: #DBD6D8;
+}
+
+.testimonials-container h1 {
+    margin: 0;
+    margin-top: 10px;
+}
+
+.testimonials-wrapper {
+    overflow: hidden;
+    width: 100%;
+}
+
+.testimonials {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.testimonial {
+    min-width: 33.33%;
+    box-sizing: border-box;
+    padding: 20px;
+    text-align: center;
+}
+
+button.prev, button.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #E7E4E5;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+button.prev {
+    left: 10px;
+}
+
+button.next {
+    right: 10px;
+}
+
+button.prev:hover, button.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
 
 /* Footer */
 .footer-container {
     width: 100%;
     height: 60px;
     background-color: #231f20;
-    color: white;
+    color: #E7E4E5;
     display: flex;
     flex-shrink: 0;
     justify-content: center;

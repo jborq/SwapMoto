@@ -13,5 +13,7 @@ function changeBackground() {
     currentIndex = (currentIndex + 1) % images.length;
 }
 
-setInterval(changeBackground, 5000); 
-window.onload = changeBackground; 
+export function startSlideshow() {
+    changeBackground();
+    setInterval(changeBackground, 5000);
+}
