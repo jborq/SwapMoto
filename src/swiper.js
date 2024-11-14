@@ -3,8 +3,17 @@ let currentIndex = 0;
 export function scrollTestimonials(direction) {
     const testimonials = document.querySelector('.testimonials');
     const testimonialCount = document.querySelectorAll('.testimonial').length;
-    const visibleTestimonials = 3;
-    const maxIndex = Math.ceil(testimonialCount / visibleTestimonials) - 1;
+
+    let visibleTestimonials;
+    if (window.innerWidth <= 480) {
+        visibleTestimonials = 1;
+    } else if (window.innerWidth <= 768) {
+        visibleTestimonials = 2;
+    } else {
+        visibleTestimonials = 3;
+    }
+
+    const maxIndex = Math.max(0, testimonialCount - visibleTestimonials);
 
     currentIndex += direction;
 

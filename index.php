@@ -83,7 +83,7 @@ if ($result->num_rows > 0) {
             <div class="moto-container">
                 <?php foreach ($motorcycle as $moto): ?>
                     <div class="moto-card">
-                        <a href="./public/motorcycle.php?brand=<?php echo $moto['Marka']; ?>&model=<?php echo $moto['Model']; ?>">
+                        <a href="#">
                             <img src="<?php echo './uploads/bikes/draft/' . $moto['Zdjęcie']; ?>" alt="<?php echo $moto['Marka'] . ' ' . $moto['Model']; ?>">
                             <h2><?php echo $moto['Marka'] . ' ' . $moto['Model']; ?></h2>
                             <p><?php echo $moto['Miasto']; ?></p>
@@ -92,6 +92,7 @@ if ($result->num_rows > 0) {
                     </div>
                 <?php endforeach; ?>
             </div> 
+            <button type="button" onclick="location.href='#'">View all motorcycles</button>
         </div>
         <div class="testimonials-container">
             <h1>Experiences of our customers</h1>
@@ -119,7 +120,7 @@ if ($result->num_rows > 0) {
                     <div class="testimonial">
                         <p class="stars">★★★★★</p>
                         <p>“Good service, well maintained motorbike, and quick process of both picking up and returning the motorbike.”</p>
-                        <strong>Adam</strong>
+                        <strong>Bob</strong>
                         <p>August 16, 2024</p>
                     </div>
                     <div class="testimonial">
