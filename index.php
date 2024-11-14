@@ -26,15 +26,7 @@ if ($result->num_rows > 0) {
     <link rel="stylesheet" href="./style.css?v=<?php echo time(); ?>">
 </head>
 <body>
-    <div class="header-container">
-        <div class="logo">
-            <img src="./public/images/SwapMoto.png" alt="Logo" />
-        </div> 
-        <div class="header-button">
-            <button type="button" onclick="location.href='./public/login.php'">Login</button>
-            <button type="button" onclick="location.href='./public/register.php'">Register at SwapMoto</button>
-        </div>
-    </div>
+    <?php include './partials/navbar-logout.php'; ?>
     <div class="content-container">
         <div class="heroHeader">
             <h1>Discover nearby garages and rent your favorite motorcycle in just a few clicks!</h1>
