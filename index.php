@@ -1,3 +1,22 @@
+<?php
+include './database/db.php';
+
+$query = "SELECT Motocykle.Marka, Motocykle.Model, Motocykle.Cena, Motocykle.Zdjęcie, Lokalizacje.Miasto 
+          FROM Motocykle 
+          JOIN Lokalizacje ON Motocykle.IDlokalizacji = Lokalizacje.IDlokalizacji 
+          WHERE Motocykle.Status = 'dostępny' 
+          LIMIT 15";
+
+$result = $conn->query($query);
+$motorcycle = [];
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $motorcycle[] = $row;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +28,7 @@
 <body>
     <div class="header-container">
         <div class="logo">
-            <img src=".\public\images\SwapMoto.png" alt="Logo" />
+            <img src="./public/images/SwapMoto.png" alt="Logo" />
         </div> 
         <div class="header-button">
             <button type="button" onclick="location.href='./public/login.php'">Login</button>
@@ -61,15 +80,83 @@
             </div>
         </div>
         <div class="content">
-            fsfsdfsdfsf
+            <div class="moto-container">
+                <?php foreach ($motorcycle as $moto): ?>
+                    <div class="moto-card">
+                        <a href="#">
+                            <img src="<?php echo './uploads/bikes/draft/' . $moto['Zdjęcie']; ?>" alt="<?php echo $moto['Marka'] . ' ' . $moto['Model']; ?>">
+                            <h2><?php echo $moto['Marka'] . ' ' . $moto['Model']; ?></h2>
+                            <p><?php echo $moto['Miasto']; ?></p>
+                            <p><?php echo $moto['Cena']; ?> PLN / day</p>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            </div> 
+            <button type="button" onclick="location.href='#'">View all motorcycles</button>
         </div>
-
+        <div class="testimonials-container">
+            <h1>Experiences of our customers</h1>
+            <p>Not convinced yet? Check out the reviews of SwapMoto.</p>
+            <div class="testimonials-wrapper">
+                <div class="testimonials">
+                    <div class="testimonial">
+                        <p class="stars">★★★★★</p>
+                        <p>“I rented a motorcycle for a day and it was a great experience. The motorcycle was in perfect condition and the service was excellent. I will definitely rent a motorcycle again through SwapMoto.”</p>
+                        <strong>Adam</strong>
+                        <p>May 8, 2024</p>
+                    </div>
+                    <div class="testimonial">
+                        <p class="stars">★★★★★</p>
+                        <p>“Everything was clear, well organised and definitely worth repeating! In short, a very pleasant way to rent a motorbike.”</p>
+                        <strong>Ola</strong>
+                        <p>April 25, 2024</p>
+                    </div>
+                    <div class="testimonial">
+                        <p class="stars">★★★★★</p>
+                        <p>“Excellent service, even with a last-minute reservation. Definitely going to do it more often.”</p>
+                        <strong>Maciek</strong>
+                        <p>June 24, 2024</p>
+                    </div>
+                    <div class="testimonial">
+                        <p class="stars">★★★★★</p>
+                        <p>“Good service, well maintained motorbike, and quick process of both picking up and returning the motorbike.”</p>
+                        <strong>Bob</strong>
+                        <p>August 16, 2024</p>
+                    </div>
+                    <div class="testimonial">
+                        <p class="stars">★★★★★</p>
+                        <p>“The best scooter rental place in Warsaw with brand new scooters I highly recommend to everyone and thanks for the good quality scooters”</p>
+                        <strong>Greg</strong>
+                        <p>May 30, 2024</p>
+                    </div>
+                    <div class="testimonial">
+                        <p class="stars">★★★★★</p>
+                        <p>“Kind and professional. Flexible with my needs. The motorcycle worked perfectly. I will repeat with you in my next opportunity. Thank you.”</p>
+                        <strong>Ruben</strong>
+                        <p>August 7, 2024</p>
+                    </div>
+                    <div class="testimonial">
+                        <p class="stars">★★★★★</p>
+                        <p>“Great service, very friendly and helpful staff. The motorcycle was in perfect condition. I will definitely rent a motorcycle again through SwapMoto.”</p>
+                        <strong>Marcin</strong>
+                        <p>July 14, 2024</p>
+                    </div>
+                </div>
+            </div>
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+        </div>
     </div>
     <div class="footer-container">
         &copy SwapMoto 2024
     </div>
+    <script type="module">
+        import { startSlideshow } from './src/slideshow.js';
+        import { scrollTestimonials } from './src/swiper.js';
 
-    <script src="./src/slideshow.js"></script>
-
+        window.onload = startSlideshow;
+        document.querySelector('.prev').addEventListener('click', () => scrollTestimonials(-1));
+        document.querySelector('.next').addEventListener('click', () => scrollTestimonials(1));
+    </script>
 </body>
 </html>
