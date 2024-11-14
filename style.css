@@ -38,7 +38,7 @@ button:hover {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    max-height: 80px;
+    /* max-height: 80px; */
     background-color: #E7E4E5;
 }
 
@@ -145,11 +145,46 @@ button:hover {
     flex: 1;
     justify-content: space-between;
     align-items: center;
-    padding: 50px;
+    padding: 50px 200px;
     background-color: #E7E4E5;
 
 }
 
+.moto-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+}
+
+.moto-card {
+    width: 25%;
+    border: 1px solid #231f20;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #DBD6D8;
+}
+
+.moto-card img {
+    width: 100%;
+    height: auto;
+}
+
+.moto-card h2 {
+    margin: 10px 0;
+}
+
+.moto-card p {
+    font-size: 1.2em;
+    color: #231f20;
+}
+
+.moto-card a {
+    text-decoration: none;
+    color: #231f20;
+}
 
 
 

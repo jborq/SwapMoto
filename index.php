@@ -1,3 +1,22 @@
+<?php
+include './database/db.php';
+
+$query = "SELECT Motocykle.Marka, Motocykle.Model, Motocykle.Cena, Motocykle.Zdjęcie, Lokalizacje.Miasto 
+          FROM Motocykle 
+          JOIN Lokalizacje ON Motocykle.IDlokalizacji = Lokalizacje.IDlokalizacji 
+          WHERE Motocykle.Status = 'dostępny' 
+          LIMIT 15";
+
+$result = $conn->query($query);
+$motorcycle = [];
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $motorcycle[] = $row;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +28,7 @@
 <body>
     <div class="header-container">
         <div class="logo">
-            <img src=".\public\images\SwapMoto.png" alt="Logo" />
+            <img src="./public/images/SwapMoto.png" alt="Logo" />
         </div> 
         <div class="header-button">
             <button type="button" onclick="location.href='./public/login.php'">Login</button>
@@ -61,7 +80,18 @@
             </div>
         </div>
         <div class="content">
-            fsfsdfsdfsf
+            <div class="moto-container">
+                <?php foreach ($motorcycle as $moto): ?>
+                    <div class="moto-card">
+                        <a href="./public/motorcycle.php?brand=<?php echo $moto['Marka']; ?>&model=<?php echo $moto['Model']; ?>">
+                            <img src="<?php echo './uploads/bikes/draft/' . $moto['Zdjęcie']; ?>" alt="<?php echo $moto['Marka'] . ' ' . $moto['Model']; ?>">
+                            <h2><?php echo $moto['Marka'] . ' ' . $moto['Model']; ?></h2>
+                            <p><?php echo $moto['Miasto']; ?></p>
+                            <p><?php echo $moto['Cena']; ?> PLN / day</p>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            </div> 
         </div>
         <div class="testimonials-container">
             <h1>Experiences of our customers</h1>
