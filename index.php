@@ -68,7 +68,6 @@ if ($result->num_rows > 0) {
                         The score of other bikers
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="content">
@@ -84,7 +83,7 @@ if ($result->num_rows > 0) {
                     </div>
                 <?php endforeach; ?>
             </div> 
-            <button type="button" onclick="location.href='#'">View all motorcycles</button>
+            <button type="button" onclick="location.href='./public/all-motorcycles.php'">View all motorcycles</button>
         </div>
         <div class="testimonials-container">
             <h1>Experiences of our customers</h1>

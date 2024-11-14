@@ -43,6 +43,7 @@ h1, p {
 .header-container {
     display: flex;
     flex: 1;
+    flex-grow: 0;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -143,7 +144,7 @@ h1, p {
     height: auto;
 }
 
-/* Moto boxes */
+/* Moto cards */
 .content {
     display: flex;
     flex: 1;
@@ -170,6 +171,7 @@ h1, p {
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #DBD6D8;
+    min-width: 150px;
 }
 
 .moto-card:hover {
@@ -283,10 +285,6 @@ button.prev:hover, button.next:hover {
     /* Content */
     .content {
         padding: 50px 20px;
-    }
-
-    .moto-card {
-        min-width: 150px;
     }
 
     .testimonial {
