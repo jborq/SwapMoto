@@ -285,7 +285,11 @@ button.prev:hover, button.next:hover {
 
     /* Content */
     .content {
-        padding: 50px 20px;
+        padding: 50px 10px;
+    }
+
+    .moto-container {
+        gap: 15px;
     }
 
     .testimonial {
