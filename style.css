@@ -172,6 +172,7 @@ h1, p {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #DBD6D8;
     min-width: 150px;
+    padding: 10px;
 }
 
 .moto-card:hover {

@@ -43,7 +43,7 @@ if ($result->num_rows > 0) {
         <div class="content">
             <div class="filters-section">
                 <div class="location-filter">
-                    <label for="location">Pickup Location:</label>
+                    <label for="location">Pickup location:</label>
                     <select name="location" id="location">
                         <option value="all">All</option>
                         <option value="warszawa">Warszawa</option>
@@ -53,7 +53,7 @@ if ($result->num_rows > 0) {
                     </select>
                 </div>
                 <div class="moto-type-filter">
-                    <label for="type">Motorcycle Type:</label>
+                    <label for="type">Motorcycle type:</label>
                     <select name="type" id="type">
                         <option value="all">All</option>
                         <option value="cruiser">Motorcycle</option>
@@ -98,13 +98,13 @@ if ($result->num_rows > 0) {
                     <div class="price-input-container">
                         <div class="price-input">
                             <div class="price-field">
-                                <span>Minimum Price</span>
+                                <span>Minimum daily price</span>
                                 <input type="number" 
                                     class="min-input" 
                                     value="0">
                             </div>
                             <div class="price-field">
-                                <span>Maximum Price</span>
+                                <span>Maximum daily price</span>
                                 <input type="number" 
                                     class="max-input" 
                                     value="500">
@@ -138,6 +138,7 @@ if ($result->num_rows > 0) {
                     <div class="sort-container">
                         <label for="sort">Sort by:</label>
                         <select name="sort" id="sort">
+                            <option value="most-recomended">Most recomended</option>
                             <option value="price">Price (lowest)</option>
                             <option value="priceDesc">Price (highest)</option>
                         </select>
