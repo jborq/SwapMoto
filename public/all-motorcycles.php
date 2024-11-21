@@ -93,8 +93,8 @@ if ($result->num_rows > 0) {
             </a>
         </div>
         <div class="header-button">
-            <button type="button" onclick="location.href='./public/login.php'">Login</button>
-            <button type="button" onclick="location.href='./public/register.php'">Register at SwapMoto</button>
+            <button type="button" onclick="location.href='../public/login.php'">Login</button>
+            <button type="button" onclick="location.href='../public/register.php'">Register at SwapMoto</button>
         </div>
     </div>
     <form method="GET" action="all-motorcycles.php">
@@ -109,9 +109,9 @@ if ($result->num_rows > 0) {
                         <select name="location" id="location">
                             <option value="all" <?php echo $location === 'all' ? 'selected' : ''; ?>>All</option>
                             <option value="warszawa" <?php echo $location === 'warszawa' ? 'selected' : ''; ?>>Warszawa</option>
-                            <option value="krakow" <?php echo $location === 'krakow' ? 'selected' : ''; ?>>Kraków</option>
-                            <option value="lodz" <?php echo $location === 'lodz' ? 'selected' : ''; ?>>Łódź</option>
-                            <option value="gdansk" <?php echo $location === 'gdansk' ? 'selected' : ''; ?>>Gdańsk</option>
+                            <option value="kraków" <?php echo $location === 'kraków' ? 'selected' : ''; ?>>Kraków</option>
+                            <option value="łódź" <?php echo $location === 'łódź' ? 'selected' : ''; ?>>Łódź</option>
+                            <option value="gdańsk" <?php echo $location === 'gdańsk' ? 'selected' : ''; ?>>Gdańsk</option>
                         </select>
                     </div>
                     <div class="moto-type-filter">
