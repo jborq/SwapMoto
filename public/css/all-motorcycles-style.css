@@ -34,8 +34,15 @@ a {
     text-decoration: none;
 }
 
-h1, p {
+select {
+    height: 35px;
+    font-size: 15px;
+    border-radius: 5px;
     text-align: center;
+    background: #231f20;
+    color: #E7E4E5;
+    cursor: pointer;
+    padding: 5px;
 }
 
 
@@ -75,92 +82,66 @@ h1, p {
 
 
 /* Content */
-.heroHeader {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    align-items: center;
-    padding: 50px;
-    background-color: #f0f0f0;
-    text-align: center;
-    background-size: cover;
-    background-position: center;
-    transition: background-image 1s ease-in-out;
-    color: white;
-    overflow: hidden; 
-}
-
-.heroHeader::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6); 
-    backdrop-filter: blur(2px); 
-    z-index: 1;
-}
-
-.heroHeader * {
-    position: relative;
-    z-index: 2;
-}
-
-.heroHeader p {
-    width: 70%;
-}
-
-.achievement-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    width: 80%;
-    padding: 50px;
-}
-
-.achievement {
+.content-container {
     display: flex;
     flex: 1;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 10px;
-    max-width: 200px;
 }
 
-.achievement-title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding-bottom: 10px;
-    font-weight: bold;
-}
-
-.achievement img {
-    width: 20px;
-    height: auto;
-}
-
-/* Moto cards */
 .content {
     display: flex;
     flex: 1;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 50px 200px;
-    background-color: #E7E4E5;
+    flex-direction: row;
+    padding: 50px;
+    padding-top: 20px;
+    gap: 50px;
 }
 
+.content-header {
+    padding-left: 90px;
+}
+
+.filters-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 40px;
+}
+
+.filters-section div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.submit-button {
+    display: flex;
+    padding: 50px 0;
+}
+
+.moto-content-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 20px;
+}
+
+.moto-container-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 150px;
+}
+
+/* Moto cards */
 .moto-container {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-    gap: 40px;
+    gap: 50px;
     justify-content: center;
-    padding-bottom: 50px;
+    padding-bottom: 20px;
 }
 
 .moto-card {
@@ -195,65 +176,10 @@ h1, p {
     color: #231f20;
 }
 
-/* Testimonials section */
-.testimonials-container {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    padding: 20px;
-    background-color: #DBD6D8;
-}
 
-.testimonials-container h1 {
-    margin: 0;
-    margin-top: 10px;
-}
 
-.testimonials-wrapper {
-    overflow: hidden;
-    width: 100%;
-}
 
-.testimonials {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
 
-.testimonial {
-    min-width: 33.33%;
-    box-sizing: border-box;
-    padding: 20px;
-    text-align: center;
-}
-
-button.prev, button.next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #E7E4E5;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 10;
-}
-
-button.prev {
-    left: 10px;
-}
-
-button.next {
-    right: 10px;
-}
-
-button.prev:hover, button.next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
 
 
 /* Footer */
@@ -267,6 +193,91 @@ button.prev:hover, button.next:hover {
     justify-content: center;
     align-items: center;
 }
+
+
+
+
+
+
+
+/* Styles for the price input container */
+.price-input-container {
+    width: 100%;
+}
+
+.price-input .price-field {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.price-field input {
+    flex: 1;
+    height: 35px;
+    font-size: 15px;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid #231f20;
+    background: #E7E4E5;
+}
+
+.price-input {
+    width: 100%;
+    font-size: 15px;
+}
+
+/* Remove Arrows/Spinners */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.slider-container {
+    width: 100%;
+}
+
+.slider-container {
+    height: 6px;
+    position: relative;
+    background: #E7E4E5;
+    border-radius: 5px;
+}
+
+.slider-container .price-slider {
+    height: 100%;
+    left: 25%;
+    right: 15%;
+    position: absolute;
+    border-radius: 5px;
+    background: #231f20;
+}
+
+.range-input {
+    position: relative;
+}
+
+.range-input input {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    background: none;
+    top: -5px;
+    pointer-events: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+/* Styles for the range thumb in WebKit browsers */
+input[type="range"]::-webkit-slider-thumb {
+    height: 18px;
+    width: 18px;
+    border-radius: 70%;
+    background: #231f20;
+    pointer-events: auto;
+    -webkit-appearance: none;
+}
+
 
 @media (max-width: 768px) {
     /* Header */
@@ -286,19 +297,41 @@ button.prev:hover, button.next:hover {
     /* Content */
     .content {
         padding: 50px 10px;
+        padding-top: 0;
+    }
+
+    .content {
+        flex-direction: column;
+    }
+
+    .moto-container-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        padding-top: 0;
     }
 
     .moto-container {
         gap: 15px;
     }
 
-    .testimonial {
-        min-width: 50%;
-    }
-}
 
-@media (max-width: 480px) {
-    .testimonial {
-        min-width: 100%;
+    .content-header {
+        padding-left: 0;
     }
+
+    .content-header h1 {
+        text-align: center;
+    }
+
+    .filters-section {
+        padding: 20px;
+    }
+
+    .submit-button {
+        padding: 20px 0;
+        padding-bottom: 0;
+    }
+
 }
