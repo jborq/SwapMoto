@@ -75,7 +75,7 @@ if ($result->num_rows > 0) {
                 <?php foreach ($motorcycle as $moto): ?>
                     <div class="moto-card">
                         <a href="#">
-                            <img src="<?php echo './uploads/bikes/draft/' . $moto['Zdjęcie']; ?>" alt="<?php echo $moto['Marka'] . ' ' . $moto['Model']; ?>">
+                            <img src="<?php echo './uploads/bikes/' . $moto['Zdjęcie']; ?>" alt="<?php echo $moto['Marka'] . ' ' . $moto['Model']; ?>">
                             <h2><?php echo $moto['Marka'] . ' ' . $moto['Model']; ?></h2>
                             <p><?php echo $moto['Miasto']; ?></p>
                             <p><?php echo $moto['Cena']; ?> PLN / day</p>
