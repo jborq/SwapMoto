@@ -124,17 +124,19 @@ function formatPhoneNumber($phoneNumber)
                         <div class="review">
                             <div class="review-header">
                                 <span class="name"><?php echo $review['Imię']; ?></span>
-                                <span>&#x2022</span>
-                                <span><?php echo substr($review['Data_dodania'], 0, 10); ?></span>
-                                <span>&#x2022</span>
-                                <span class="star">
-                                    <?php for ($i = 0; $i < $review['Ocena']; $i++): ?>
-                                        <i class="fas fa-star"></i>
-                                    <?php endfor; ?>
-                                    <?php for ($i = $review['Ocena']; $i < 5; $i++): ?>
-                                        <i class="far fa-star"></i>
-                                    <?php endfor; ?>
-                                </span>
+                                <div>
+                                    <span>&#x2022</span>
+                                    <span><?php echo substr($review['Data_dodania'], 0, 10); ?></span>
+                                    <span>&#x2022</span>
+                                    <span class="star">
+                                        <?php for ($i = 0; $i < $review['Ocena']; $i++): ?>
+                                            <i class="fas fa-star"></i>
+                                        <?php endfor; ?>
+                                        <?php for ($i = $review['Ocena']; $i < 5; $i++): ?>
+                                            <i class="far fa-star"></i>
+                                        <?php endfor; ?>
+                                    </span>
+                                </div>
                             </div>
                             <div class="review-body">
                                 <p><?php echo $review['Komentarz']; ?></p>

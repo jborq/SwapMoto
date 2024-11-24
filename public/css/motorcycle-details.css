@@ -249,6 +249,7 @@ h3 {
     display: flex;
     flex: 1;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 10px;
     align-items: center;
 }
@@ -359,6 +360,15 @@ h3 {
 @media (max-width: 960px) {
     .content {
         padding-left: 10px;
+    }
+
+    .review-header {
+        align-self: flex-start;
+        gap: 5px;
+    }
+
+    .review-header .name {
+        align-self: flex-start;
     }
 
     .rent-container {
