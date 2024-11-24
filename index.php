@@ -78,7 +78,7 @@ if ($result->num_rows > 0) {
                             <img src="<?php echo './uploads/bikes/' . $moto['Zdjęcie']; ?>" alt="<?php echo $moto['Marka'] . ' ' . $moto['Model']; ?>">
                             <h2><?php echo $moto['Marka'] . ' ' . $moto['Model']; ?></h2>
                             <p><?php echo $moto['Miasto']; ?></p>
-                            <p><?php echo $moto['Cena']; ?> PLN / day</p>
+                            <p><?php echo $moto['Cena']; ?> zł / day</p>
                         </a>
                     </div>
                 <?php endforeach; ?>

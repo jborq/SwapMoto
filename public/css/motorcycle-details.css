@@ -78,9 +78,6 @@ h3 {
 }
 
 
-
-
-
 /* Content */
 .content-container {
     display: flex;
@@ -88,8 +85,10 @@ h3 {
     justify-content: center;
     align-items: center;
     background-color: #f0f0f0;
+    padding: 0 150px;
 }
 
+/* Moto details section */
 .content {
     display: flex;
     flex: 1;
@@ -149,6 +148,7 @@ h3 {
     padding-left: 10px;
 }
 
+/* Insurance section */
 .insurance-container {
     display: flex;
     flex: 1;
@@ -163,7 +163,6 @@ h3 {
     flex: 1;
     flex-direction: row;
     gap: 20px;
-    /* align-self: flex-start; */
 }
 
 .insurance-details-left {
@@ -184,7 +183,6 @@ h3 {
     display: flex;
     flex: 1;
     flex-direction: row;
-    /* justify-content: center; */
     align-items: center;
     gap: 10px;
     max-width: 200px;
@@ -198,13 +196,12 @@ h3 {
     height: auto;
 }
 
-
+/* Location section */
 .location-container {
     display: flex;
     flex: 1;
     flex-direction: column;
     gap: 20px;
-    /* align-self: flex-start; */
     padding-left: 50px;
 }
 
@@ -213,14 +210,12 @@ h3 {
     flex: 1;
     flex-direction: column;
     gap: 20px;
-    /* align-self: flex-start; */
 }
 
 .location-details {
     display: flex;
     flex: 1;
     flex-direction: row;
-    /* justify-content: center; */
     align-items: center;
     gap: 10px;
     max-width: 200px;
@@ -234,7 +229,7 @@ h3 {
     height: auto;
 }
 
-
+/* Reviews section */
 .review-container {
     display: flex;
     flex: 1;
@@ -268,12 +263,85 @@ h3 {
     font-weight: bold;
 }
 
+/* Rent motorcycle section */
+.rent-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-self: flex-start;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    position: sticky;
+    top: 40px;
+}
 
+.rent-form {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px;
+    border: 1px solid #231f20;
+    border-radius: 10px;
+    background-color: #E7E4E5;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2)
+}
 
+.date,
+.time {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    gap: 40px;
+    margin-bottom: 50px;
+}
 
+.start-date,
+.end-date,
+.start-time,
+.end-time {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 10px;
+}
 
+.rent-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 1.2em;
+}
 
+.rent-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    background-color: #f0f0f0;
+    font-size: 1.1em;
+}
 
+.rent-form button {
+    width: 100%;
+    font-size: 1.1em;
+}
+
+.rent-container .main-text {
+    font-weight: bold;
+    font-size: 2em;
+    margin-bottom: 0;
+}
+
+.rent-container .sub-text {
+    font-size: 1em;
+}
+
+.rent-form hr {
+    border: none;
+    border-top: 1px solid #231f20;
+    margin: 0;
+}
 
 
 /* Footer */
