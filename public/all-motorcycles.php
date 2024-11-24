@@ -9,7 +9,7 @@ $minPrice = isset($_GET['min-price']) ? $_GET['min-price'] : 0;
 $maxPrice = isset($_GET['max-price']) ? $_GET['max-price'] : 500;
 $sort = isset($_GET['sort']) ? $_GET['sort'] : 'most-recomended';
 
-$query = "SELECT Motocykle.Marka, Motocykle.Model, Motocykle.Cena, Motocykle.Zdjęcie, Lokalizacje.Miasto 
+$query = "SELECT IDmotocykla, Motocykle.Marka, Motocykle.Model, Motocykle.Cena, Motocykle.Zdjęcie, Lokalizacje.Miasto 
           FROM Motocykle 
           JOIN Lokalizacje ON Motocykle.IDlokalizacji = Lokalizacje.IDlokalizacji 
           WHERE Motocykle.Status = 'dostępny'";
@@ -214,11 +214,11 @@ if ($result->num_rows > 0) {
                     <div class="moto-container">
                         <?php foreach ($motorcycle as $moto): ?>
                             <div class="moto-card">
-                                <a href="#">
+                                <a href="../public/motorcycle-details.php?id=<?php echo $moto['IDmotocykla']; ?>">
                                     <img src="<?php echo '../uploads/bikes/' . $moto['Zdjęcie']; ?>" alt="<?php echo $moto['Marka'] . ' ' . $moto['Model']; ?>">
                                     <h2><?php echo $moto['Marka'] . ' ' . $moto['Model']; ?></h2>
                                     <p><?php echo $moto['Miasto']; ?></p>
-                                    <p><?php echo $moto['Cena']; ?> PLN / day</p>
+                                    <p><?php echo $moto['Cena']; ?> zł / day</p>
                                 </a>
                             </div>
                         <?php endforeach; ?>

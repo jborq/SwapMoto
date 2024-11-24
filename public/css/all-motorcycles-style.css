@@ -83,6 +83,7 @@ select {
 
 /* Content */
 .content-container {
+    background-color: #f0f0f0;
     display: flex;
     flex: 1;
     flex-direction: column;
