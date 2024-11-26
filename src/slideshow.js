@@ -1,19 +1,29 @@
-const images = [
-    './public/images/warsaw.jpg',
-    './public/images/lodz.jpg',
-    './public/images/gdansk.jpg',
-    './public/images/cracow.jpg',
-];
-
+const slides = document.querySelectorAll('.achievement-slide');
 let currentIndex = 0;
 
-function changeBackground() {
-    const container = document.querySelector('.heroHeader');
-    container.style.backgroundImage = `url(${images[currentIndex]})`;
-    currentIndex = (currentIndex + 1) % images.length;
+function changeSlide() {
+    slides.forEach((slide, index) => {
+        slide.classList.remove('active');
+        if (index === currentIndex) {
+            slide.classList.add('active');
+        }
+    });
+}
+
+function nextSlide() {
+    currentIndex = (currentIndex + 1) % slides.length;
+    changeSlide();
+}
+
+function prevSlide() {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    changeSlide();
 }
 
 export function startSlideshow() {
-    changeBackground();
-    setInterval(changeBackground, 5000);
+    changeSlide();
+    setInterval(nextSlide, 10000);
 }
+
+document.querySelector('.next-slide').addEventListener('click', nextSlide);
+document.querySelector('.prev-slide').addEventListener('click', prevSlide);

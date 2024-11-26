@@ -19,56 +19,135 @@ if ($result->num_rows > 0) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rent a motorcycle at SwapMoto</title>
     <link rel="stylesheet" href="./style.css?v=<?php echo time(); ?>">
 </head>
+
 <body>
     <?php include './partials/navbar-logout.php'; ?>
     <div class="content-container">
-        <div class="heroHeader">
+        <div class="heroText">
             <h1>Discover nearby garages and rent your favorite motorcycle in just a few clicks!</h1>
             <p>Through SwapMoto you can rent motorcycles directly from dealers or private motorcycle owners in your area. From vintage cars to the newest BMW or Harley-Davidson models. With our motorcycle rentals you always have the same favorable rental conditions and you don't have to pay a deposit in advance. So check out our range of motorcycles for rent in and around your city!</p>
-            <div class="achievement-container">
-                <div class="achievement">
-                    <div class="achievement-title">
-                        <img src="./public/icons/bike_icon.png" alt="Bike Icon" />
-                        1500+
-                    </div>
-                    <div class="achievement-description">
-                        Motorcycles for rent in your neighbourhood
-                    </div>
+        </div>
+        <div class="achievement-container">
+
+
+            <div class="achievement-slide active">
+                <div class="achievement-img">
+                    <img src="./public/images/warsaw.jpg" alt="Warsaw">
                 </div>
-                <div class="achievement">
-                    <div class="achievement-title">
-                        <img src="./public/icons/clock_icon.png" alt="Clock Icon" />
-                        24/7
+
+                <div class="achievement-section">
+                    <div class="achievement">
+                        <div class="achievement-title">
+                            <img src="./public/icons/bike_icon_b.png" alt="Bike Icon" />
+                            1500+
+                        </div>
+                        <div class="achievement-description">
+                            Motorcycles for rent in your neighbourhood
+                        </div>
                     </div>
-                    <div class="achievement-description">
-                        Open and easy online renting
-                    </div>
-                </div>
-                <div class="achievement">
-                    <div class="achievement-title">
-                        <img src="./public/icons/star_icon.png" alt="Bike Icon" />
-                        Affordable
-                    </div>
-                    <div class="achievement-description">
-                        Rental day of 24 hours and >100 km free per day
-                    </div>
-                </div>
-                <div class="achievement">
-                    <div class="achievement-title">
-                        <img src="./public/icons/thumb_icon.png" alt="Bike Icon" />
-                        8.7
-                    </div>
-                    <div class="achievement-description">
-                        The score of other bikers
+                    <div class="achievement">
+                        <div class="achievement-title">
+                            <img src="./public/icons/clock_icon_b.png" alt="Clock Icon" />
+                            24/7
+                        </div>
+                        <div class="achievement-description">
+                            Open and easy online renting
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <div class="achievement-slide">
+                <div class="achievement-img">
+                    <img src="./public/images/lodz.jpg" alt="Lodz">
+                </div>
+
+                <div class="achievement-section">
+                    <div class="achievement">
+                        <div class="achievement-title">
+                            <img src="./public/icons/bike_icon_b.png" alt="Bike Icon" />
+                            1500+
+                        </div>
+                        <div class="achievement-description">
+                            Motorcycles for rent in your neighbourhood
+                        </div>
+                    </div>
+                    <div class="achievement">
+                        <div class="achievement-title">
+                            <img src="./public/icons/clock_icon_b.png" alt="Clock Icon" />
+                            24/7
+                        </div>
+                        <div class="achievement-description">
+                            Open and easy online renting
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="achievement-slide">
+                <div class="achievement-img">
+                    <img src="./public/images/cracow.jpg" alt="Cracow">
+                </div>
+
+                <div class="achievement-section">
+                    <div class="achievement">
+                        <div class="achievement-title">
+                            <img src="./public/icons/star_icon_b.png" alt="Bike Icon" />
+                            Affordable
+                        </div>
+                        <div class="achievement-description">
+                            Rental day of 24 hours and >100 km free per day
+                        </div>
+                    </div>
+                    <div class="achievement">
+                        <div class="achievement-title">
+                            <img src="./public/icons/thumb_icon_b.png" alt="Bike Icon" />
+                            8.7
+                        </div>
+                        <div class="achievement-description">
+                            The score of other bikers
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="achievement-slide">
+                <div class="achievement-img">
+                    <img src="./public/images/gdansk.jpg" alt="Gdansk">
+                </div>
+
+                <div class="achievement-section">
+                    <div class="achievement">
+                        <div class="achievement-title">
+                            <img src="./public/icons/star_icon_b.png" alt="Bike Icon" />
+                            Affordable
+                        </div>
+                        <div class="achievement-description">
+                            Rental day of 24 hours and >100 km free per day
+                        </div>
+                    </div>
+                    <div class="achievement">
+                        <div class="achievement-title">
+                            <img src="./public/icons/thumb_icon_b.png" alt="Bike Icon" />
+                            8.7
+                        </div>
+                        <div class="achievement-description">
+                            The score of other bikers
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="prev-slide">&#10094;</button>
+            <button class="next-slide">&#10095;</button>
+
         </div>
         <div class="content">
             <div class="moto-container">
@@ -82,7 +161,7 @@ if ($result->num_rows > 0) {
                         </a>
                     </div>
                 <?php endforeach; ?>
-            </div> 
+            </div>
             <button type="button" onclick="location.href='./public/all-motorcycles.php'">View all motorcycles</button>
         </div>
         <div class="testimonials-container">
@@ -142,12 +221,17 @@ if ($result->num_rows > 0) {
         &copy SwapMoto 2024
     </div>
     <script type="module">
-        import { startSlideshow } from './src/slideshow.js';
-        import { scrollTestimonials } from './src/swiper.js';
+        import {
+            startSlideshow
+        } from './src/slideshow.js';
+        import {
+            scrollTestimonials
+        } from './src/swiper.js';
 
         window.onload = startSlideshow;
         document.querySelector('.prev').addEventListener('click', () => scrollTestimonials(-1));
         document.querySelector('.next').addEventListener('click', () => scrollTestimonials(1));
     </script>
 </body>
+
 </html>

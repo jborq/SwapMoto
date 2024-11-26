@@ -75,49 +75,63 @@ h1, p {
 
 
 /* Content */
-.heroHeader {
-    position: relative;
+.heroText {
     display: flex;
-    flex-direction: column;
     flex: 1;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 50px;
-    background-color: #f0f0f0;
-    text-align: center;
-    background-size: cover;
-    background-position: center;
-    transition: background-image 1s ease-in-out;
-    color: white;
-    overflow: hidden; 
-}
-
-.heroHeader::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6); 
-    backdrop-filter: blur(2px); 
-    z-index: 1;
-}
-
-.heroHeader * {
-    position: relative;
-    z-index: 2;
-}
-
-.heroHeader p {
-    width: 70%;
+    padding: 50px 100px;
+    background-color: #DBD6D8;
 }
 
 .achievement-container {
+    position: relative;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    width: 80%;
+    align-items: center;
+    height: 50vh;
+    background-color: #DBD6D8;
+    overflow: hidden;
     padding: 50px;
+    width: 100%;
+}
+
+.achievement-slide {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.achievement-slide.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.achievement-slide:hover {
+    transform: scale(1.05);
+    transition: transform 0.5s;
+}
+
+.achievement-slide img {
+    width: 1300px;
+    height: auto;
+    object-fit: cover;
+}
+
+.achievement-section {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 100px;
+    padding-right: 150px;
+    gap: 50px;
 }
 
 .achievement {
@@ -137,12 +151,38 @@ h1, p {
     gap: 10px;
     padding-bottom: 10px;
     font-weight: bold;
+    font-size: 1.5em;
 }
 
 .achievement img {
-    width: 20px;
+    max-width: 30px;
     height: auto;
 }
+
+button.prev-slide, button.next-slide {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #E7E4E5;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+button.prev-slide {
+    left: 10px;
+}
+
+button.next-slide {
+    right: 10px;
+}
+
+button.prev-slide:hover, button.next-slide:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
 
 /* Moto cards */
 .content {
