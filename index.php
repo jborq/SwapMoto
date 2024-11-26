@@ -103,7 +103,7 @@ if ($result->num_rows > 0) {
                             Affordable
                         </div>
                         <div class="achievement-description">
-                            Rental day of 24 hours and >100 km free per day
+                            Rental day of 24 hours
                         </div>
                     </div>
                     <div class="achievement">
@@ -130,7 +130,7 @@ if ($result->num_rows > 0) {
                             Affordable
                         </div>
                         <div class="achievement-description">
-                            Rental day of 24 hours and >100 km free per day
+                            Rental day of 24 hours
                         </div>
                     </div>
                     <div class="achievement">
