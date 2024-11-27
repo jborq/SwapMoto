@@ -37,15 +37,15 @@ if ($result->num_rows > 0) {
         <div class="achievement-container">
 
 
-            <div class="achievement-slide active">
-                <div class="achievement-img">
+            <div class="achievement-slide active first-slide">
+                <div class="achievement-img ">
                     <img src="./public/images/warsaw.jpg" alt="Warsaw">
                 </div>
 
                 <div class="achievement-section">
                     <div class="achievement">
                         <div class="achievement-title">
-                            <img src="./public/icons/bike_icon_b.png" alt="Bike Icon" />
+                            <img src="./public/icons/bike_icon.png" alt="Bike Icon" />
                             1500+
                         </div>
                         <div class="achievement-description">
@@ -54,7 +54,7 @@ if ($result->num_rows > 0) {
                     </div>
                     <div class="achievement">
                         <div class="achievement-title">
-                            <img src="./public/icons/clock_icon_b.png" alt="Clock Icon" />
+                            <img src="./public/icons/clock_icon.png" alt="Clock Icon" />
                             24/7
                         </div>
                         <div class="achievement-description">
@@ -64,7 +64,7 @@ if ($result->num_rows > 0) {
                 </div>
             </div>
 
-            <div class="achievement-slide">
+            <div class="achievement-slide second-slide">
                 <div class="achievement-img">
                     <img src="./public/images/lodz.jpg" alt="Lodz">
                 </div>
@@ -72,7 +72,7 @@ if ($result->num_rows > 0) {
                 <div class="achievement-section">
                     <div class="achievement">
                         <div class="achievement-title">
-                            <img src="./public/icons/bike_icon_b.png" alt="Bike Icon" />
+                            <img src="./public/icons/bike_icon.png" alt="Bike Icon" />
                             1500+
                         </div>
                         <div class="achievement-description">
@@ -81,7 +81,7 @@ if ($result->num_rows > 0) {
                     </div>
                     <div class="achievement">
                         <div class="achievement-title">
-                            <img src="./public/icons/clock_icon_b.png" alt="Clock Icon" />
+                            <img src="./public/icons/clock_icon.png" alt="Clock Icon" />
                             24/7
                         </div>
                         <div class="achievement-description">
@@ -91,7 +91,7 @@ if ($result->num_rows > 0) {
                 </div>
             </div>
 
-            <div class="achievement-slide">
+            <div class="achievement-slide third-slide">
                 <div class="achievement-img">
                     <img src="./public/images/cracow.jpg" alt="Cracow">
                 </div>
@@ -99,7 +99,7 @@ if ($result->num_rows > 0) {
                 <div class="achievement-section">
                     <div class="achievement">
                         <div class="achievement-title">
-                            <img src="./public/icons/star_icon_b.png" alt="Bike Icon" />
+                            <img src="./public/icons/star_icon.png" alt="Bike Icon" />
                             Affordable
                         </div>
                         <div class="achievement-description">
@@ -108,7 +108,7 @@ if ($result->num_rows > 0) {
                     </div>
                     <div class="achievement">
                         <div class="achievement-title">
-                            <img src="./public/icons/thumb_icon_b.png" alt="Bike Icon" />
+                            <img src="./public/icons/thumb_icon.png" alt="Bike Icon" />
                             8.7
                         </div>
                         <div class="achievement-description">
@@ -118,7 +118,7 @@ if ($result->num_rows > 0) {
                 </div>
             </div>
 
-            <div class="achievement-slide">
+            <div class="achievement-slide fourth-slide">
                 <div class="achievement-img">
                     <img src="./public/images/gdansk.jpg" alt="Gdansk">
                 </div>
@@ -126,7 +126,7 @@ if ($result->num_rows > 0) {
                 <div class="achievement-section">
                     <div class="achievement">
                         <div class="achievement-title">
-                            <img src="./public/icons/star_icon_b.png" alt="Bike Icon" />
+                            <img src="./public/icons/star_icon.png" alt="Bike Icon" />
                             Affordable
                         </div>
                         <div class="achievement-description">
@@ -135,7 +135,7 @@ if ($result->num_rows > 0) {
                     </div>
                     <div class="achievement">
                         <div class="achievement-title">
-                            <img src="./public/icons/thumb_icon_b.png" alt="Bike Icon" />
+                            <img src="./public/icons/thumb_icon.png" alt="Bike Icon" />
                             8.7
                         </div>
                         <div class="achievement-description">

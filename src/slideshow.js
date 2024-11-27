@@ -22,7 +22,7 @@ function prevSlide() {
 
 export function startSlideshow() {
     changeSlide();
-    setInterval(nextSlide, 10000);
+    setInterval(nextSlide, 5000);
 }
 
 document.querySelector('.next-slide').addEventListener('click', nextSlide);

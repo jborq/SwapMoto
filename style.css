@@ -100,7 +100,7 @@ h1, p {
 
 .achievement-slide {
     position: absolute;
-    width: 80%;
+    width: 90%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -108,11 +108,34 @@ h1, p {
     transition: opacity 1s ease-in-out, transform 1s ease-in-out;
     opacity: 0;
     transform: translateX(150%);
+    border: 1px solid #231f20;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .achievement-slide.active {
     opacity: 1;
     transform: translateX(0);
+}
+
+.first-slide {
+    background-color: #22535E;
+    color: white;
+}
+
+.second-slide {
+    background-color: #6A1511;
+    color: white;
+}
+
+.third-slide {
+    background-color: #596E3F;
+    color: white;
+}
+
+.fourth-slide {
+    background-color: #B89C6F;
+    color: white;
 }
 
 .achievement-slide:hover {
@@ -134,7 +157,6 @@ h1, p {
     justify-content: center;
     align-items: center;
     padding: 100px;
-    padding-left: 150px;
     gap: 50px;
 }
 
@@ -319,6 +341,7 @@ button.prev:hover, button.next:hover {
 @media (max-width: 1350px) {
     .achievement-slide {
         flex-direction: column;
+        width: 80%;
     }
 
     .achievement-container {
@@ -371,11 +394,12 @@ button.prev:hover, button.next:hover {
 
     .achievement-slide {
         flex-direction: column;
+        width: 70%;
     }
 
     .achievement-container {
         padding: 10px;
-        height: 35vh;
+        height: 50vh;
     }
 
     .achievement-section {
