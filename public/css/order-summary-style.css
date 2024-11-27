@@ -1,0 +1,10 @@
+.order-summary-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-summary-footer {
+    padding-top: 20px;
+}
