@@ -25,6 +25,7 @@ if ($result->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rent a motorcycle at SwapMoto</title>
     <link rel="stylesheet" href="./style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./public/css/navbar-footer.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
