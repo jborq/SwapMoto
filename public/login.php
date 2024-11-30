@@ -5,9 +5,8 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $redirect_url = isset($_POST['redirect_url']) ? $_POST['redirect_url'] : '../index.php';
 
-    var_dump($email);
-    var_dump($password);
     
     $query = "SELECT IDużytkownika, Hasło FROM Użytkownicy WHERE Email = ?";
     $stmt = $conn->prepare($query);
@@ -19,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $result->fetch_assoc();
         if ($password == $user['Hasło']) {
             $_SESSION['user_id'] = $user['IDużytkownika'];
-            header('Location: ../index.php');
+            header('Location: ' . $redirect_url);
             exit();
         } else {
             $error_message = "Invalid email or password.";
@@ -56,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php if (isset($error_message)): ?>
                 <p class="error"><?php echo $error_message; ?></p>
             <?php endif; ?>
+            <input type="hidden" name="redirect_url" value="<?php echo htmlspecialchars($_SERVER['HTTP_REFERER']); ?>">
             <div>
                 <label for="email">Email:</label><br>
                 <input type="email" id="email" name="email" required><br>

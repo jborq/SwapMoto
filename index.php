@@ -1,6 +1,9 @@
 <?php
 include './database/db.php';
 session_start();
+
+$base_path = '.';
+
 $query = "SELECT IDmotocykla, Motocykle.Marka, Motocykle.Model, Motocykle.Cena, Motocykle.Zdjęcie, Lokalizacje.Miasto 
           FROM Motocykle 
           JOIN Lokalizacje ON Motocykle.IDlokalizacji = Lokalizacje.IDlokalizacji 
@@ -29,13 +32,7 @@ if ($result->num_rows > 0) {
 </head>
 
 <body>
-    <?php
-    if (isset($_SESSION['user_id'])) {
-        include './partials/navbar-login.php';
-    } else {
-        include './partials/navbar-logout.php';
-    }
-    ?>
+    <?php include './partials/navbar.php';?>
     <div class="content-container">
         <div class="heroText">
             <h1>Discover nearby garages and rent your favorite motorcycle in just a few clicks!</h1>

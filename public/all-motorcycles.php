@@ -1,5 +1,8 @@
 <?php
 include '../database/db.php';
+session_start();
+
+$base_path = '..';
 
 $location = isset($_GET['location']) ? $_GET['location'] : '';
 $type = isset($_GET['type']) ? $_GET['type'] : '';
@@ -87,17 +90,7 @@ if ($result->num_rows > 0) {
 </head>
 
 <body>
-    <div class="header-container">
-        <div class="logo">
-            <a href="../index.php">
-                <img src="./images/SwapMoto.png" alt="Logo" />
-            </a>
-        </div>
-        <div class="header-button">
-            <button type="button" onclick="location.href='../public/login.php'">Login</button>
-            <button type="button" onclick="location.href='../public/register.php'">Register at SwapMoto</button>
-        </div>
-    </div>
+    <?php include '../partials/navbar.php'; ?>
     <form method="GET" action="all-motorcycles.php">
         <div class="content-container">
             <div class="content-header">

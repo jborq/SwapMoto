@@ -1,5 +1,8 @@
 <?php
 include '../database/db.php';
+session_start();
+
+$base_path = '..';
 
 $id_motocykla = isset($_POST['id_motocykla']) ? $_POST['id_motocykla'] : 0;
 $start_date = isset($_POST['start_date']) ? $_POST['start_date'] : '';
@@ -41,17 +44,7 @@ if ($start_date && $end_date) {
 </head>
 
 <body>
-    <div class="header-container">
-        <div class="logo">
-            <a href="../index.php">
-                <img src="./images/SwapMoto.png" alt="Logo" />
-            </a>
-        </div>
-        <div class="header-button">
-            <button type="button" onclick="location.href='../public/login.php'">Login</button>
-            <button type="button" onclick="location.href='../public/register.php'">Register at SwapMoto</button>
-        </div>
-    </div>
+    <?php include '../partials/navbar.php'; ?>
     <div class="container">
         <div class="content-container">
             <div class="order-summary-header">

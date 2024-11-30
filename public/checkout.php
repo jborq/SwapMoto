@@ -1,5 +1,8 @@
 <?php
 include '../database/db.php';
+session_start();
+
+$base_path = '..';
 
 $id_motocykla = isset($_POST['id_motocykla']) ? $_POST['id_motocykla'] : 0;
 $start_date = isset($_POST['start_date']) ? $_POST['start_date'] : '';
@@ -41,17 +44,7 @@ if ($start_date && $end_date) {
 </head>
 
 <body>
-    <div class="header-container">
-        <div class="logo">
-            <a href="../index.php">
-                <img src="./images/SwapMoto.png" alt="Logo" />
-            </a>
-        </div>
-        <div class="header-button">
-            <button type="button" onclick="location.href='../public/login.php'">Login</button>
-            <button type="button" onclick="location.href='../public/register.php'">Register at SwapMoto</button>
-        </div>
-    </div>
+    <?php include '../partials/navbar.php'; ?>
     <form action="order-summary.php" method="post">
         <div class="container">
             <div class="content-container">
@@ -115,15 +108,17 @@ if ($start_date && $end_date) {
                             </div>
                         </div>
                     </div>
-                    <div class="optional-login">
+                    <?php if (!isset($_SESSION['user_id'])): ?>
                         <hr>
-                        <h3>Managing you booking</h3>
-                        <p>Having an account makes it easier to manage your booking at a later date.</p>
-                        <div class="button-container">
-                            <button type="button" onclick="location.href='../public/login.php'">Login</button>
-                            <button type="button" onclick="location.href='../public/register.php'">Register at SwapMoto</button>
+                        <div class="optional-login">
+                            <h3>Managing you booking</h3>
+                            <p>Having an account makes it easier to manage your booking at a later date.</p>
+                            <div class="button-container">
+                                <button type="button" onclick="location.href='../public/login.php'">Sign In</button>
+                                <button type="button" onclick="location.href='../public/register.php'">Register at SwapMoto</button>
+                            </div>
                         </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="confirmation-container">

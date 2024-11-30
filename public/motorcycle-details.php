@@ -1,5 +1,8 @@
 <?php
 include '../database/db.php';
+session_start();
+
+$base_path = '..';
 
 $id = isset($_GET['id']) ? $_GET['id'] : 0;
 
@@ -45,17 +48,7 @@ function formatPhoneNumber($phoneNumber)
 </head>
 
 <body>
-    <div class="header-container">
-        <div class="logo">
-            <a href="../index.php">
-                <img src="./images/SwapMoto.png" alt="Logo" />
-            </a>
-        </div>
-        <div class="header-button">
-            <button type="button" onclick="location.href='../public/login.php'">Login</button>
-            <button type="button" onclick="location.href='../public/register.php'">Register at SwapMoto</button>
-        </div>
-    </div>
+    <?php include '../partials/navbar.php'; ?>
     <div class="content-container">
         <div class="content">
             <div class="moto-container">
