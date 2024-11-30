@@ -69,6 +69,23 @@ a {
     gap: 40px;
 }
 
+ul {
+    list-style-type: none;
+    display: flex;
+    gap: 40px;
+    padding: 0;
+}
+
+.header-button img {
+    width: 40px;
+    height: auto;
+}
+
+
+
+
+
+
 
 /* Footer */
 .footer-container {
