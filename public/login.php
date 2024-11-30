@@ -1,11 +1,47 @@
+<?php
+include '../database/db.php';
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    var_dump($email);
+    var_dump($password);
+    
+    $query = "SELECT IDużytkownika, Hasło FROM Użytkownicy WHERE Email = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        if ($password == $user['Hasło']) {
+            $_SESSION['user_id'] = $user['IDużytkownika'];
+            header('Location: ../index.php');
+            exit();
+        } else {
+            $error_message = "Invalid email or password.";
+        }
+    } else {
+        $error_message = "Invalid email or password.";
+    }
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign in</title>
     <link rel="stylesheet" href="./css/login-style.css?v=<?php echo time(); ?>">
 </head>
+
 <body>
 
     <div class="logo">
@@ -17,6 +53,9 @@
     <div class="login">
         <form action="./login.php" method="post">
             <h1>Sign in</h1>
+            <?php if (isset($error_message)): ?>
+                <p class="error"><?php echo $error_message; ?></p>
+            <?php endif; ?>
             <div>
                 <label for="email">Email:</label><br>
                 <input type="email" id="email" name="email" required><br>
@@ -33,6 +72,7 @@
     <div class="footer">
         SwapMoto &copy 2024
     </div>
-    
+
 </body>
+
 </html>
