@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $end_date = isset($_POST['end_date']) ? $_POST['end_date'] : '';
     $start_time = isset($_POST['start_time']) ? $_POST['start_time'] : '';
     $end_time = isset($_POST['end_time']) ? $_POST['end_time'] : '';
-    
+
     $_SESSION['rental_data'] = [
         'id_motocykla' => $id_motocykla,
         'start_date' => $start_date,
@@ -18,12 +18,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'start_time' => $start_time,
         'end_time' => $end_time
     ];
-} elseif (isset($_SESSION['rental_data'])) {
-    $id_motocykla = $_SESSION['rental_data']['id_motocykla'];
-    $start_date = $_SESSION['rental_data']['start_date'];
-    $end_date = $_SESSION['rental_data']['end_date'];
-    $start_time = $_SESSION['rental_data']['start_time'];
-    $end_time = $_SESSION['rental_data']['end_time'];
+
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = array();
+    }
+
+    $exists = false;
+    foreach ($_SESSION['cart'] as $item) {
+        if (
+            $item['id_motocykla'] == $id_motocykla &&
+            $item['start_date'] == $start_date &&
+            $item['end_date'] == $end_date &&
+            $item['start_time'] == $start_time &&
+            $item['end_time'] == $end_time
+        ) {
+            $exists = true;
+            break;
+        }
+    }
+
+    if (!$exists) {
+        $_SESSION['cart'][] = $_SESSION['rental_data'];
+    }
 } else {
     header('Location: ../index.php');
     exit();

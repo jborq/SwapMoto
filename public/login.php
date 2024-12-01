@@ -18,6 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $result->fetch_assoc();
         if ($password == $user['Hasło']) {
             $_SESSION['user_id'] = $user['IDużytkownika'];
+
+            if (isset($_SESSION['user_carts'][$user['IDużytkownika']])) {
+                $_SESSION['cart'] = $_SESSION['user_carts'][$user['IDużytkownika']];
+            } else {
+                $_SESSION['cart'] = array();
+            }
+
             header('Location: ' . $redirect_url);
             exit();
         } else {

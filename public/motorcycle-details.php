@@ -157,6 +157,17 @@ function formatPhoneNumber($phoneNumber)
                             'start_time' => $_POST['start_time'],
                             'end_time' => $_POST['end_time']
                         ];
+
+                        if (!isset($_SESSION['cart'])) {
+                            $_SESSION['cart'] = array();
+                        }
+                        $_SESSION['cart'][] = [
+                            'id_motocykla' => $id,
+                            'start_date' => $_POST['start_date'],
+                            'end_date' => $_POST['end_date'],
+                            'start_time' => $_POST['start_time'],
+                            'end_time' => $_POST['end_time']
+                        ];
                     }
                     ?>
                     <input type="hidden" name="id_motocykla" value="<?php echo $id; ?>">
@@ -180,7 +191,7 @@ function formatPhoneNumber($phoneNumber)
                             <input type="time" id="end_time" name="end_time" required>
                         </div>
                     </div>
-                    <button type="submit">GO TO CHECKOUT</button>
+                    <button type="submit" name="go_to_checkout">GO TO CHECKOUT</button>
                 </form>
                 <p class="sub-text">Best price guaranteed.</p>
             </div>

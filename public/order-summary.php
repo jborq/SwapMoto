@@ -4,13 +4,29 @@ session_start();
 
 $base_path = '..';
 
-unset($_SESSION['rental_data']);
-
 $id_motocykla = isset($_POST['id_motocykla']) ? $_POST['id_motocykla'] : 0;
 $start_date = isset($_POST['start_date']) ? $_POST['start_date'] : '';
 $end_date = isset($_POST['end_date']) ? $_POST['end_date'] : '';
 $start_time = isset($_POST['start_time']) ? $_POST['start_time'] : '';
 $end_time = isset($_POST['end_time']) ? $_POST['end_time'] : '';
+
+if (isset($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $key => $item) {
+        if (
+            $item['id_motocykla'] == $id_motocykla &&
+            $item['start_date'] == $start_date &&
+            $item['end_date'] == $end_date &&
+            $item['start_time'] == $start_time &&
+            $item['end_time'] == $end_time
+        ) {
+            unset($_SESSION['cart'][$key]);
+            $_SESSION['cart'] = array_values($_SESSION['cart']);
+            break;
+        }
+    }
+}
+
+unset($_SESSION['rental_data']);
 
 $query = "SELECT Motocykle.Marka, Motocykle.Model, Motocykle.Cena, Lokalizacje.Miasto, Lokalizacje.Adres
           FROM Motocykle 
