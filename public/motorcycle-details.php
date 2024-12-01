@@ -147,7 +147,18 @@ function formatPhoneNumber($phoneNumber)
                 <p class="main-text" id="total-price"><?php echo $moto['Cena']; ?> zł</p>
                 <p class="sub-text">(<?php echo $moto['Cena']; ?> zł per day)</p>
                 <hr>
-                <form action="checkout.php" method="post">
+                <form action="checkout.php" method="post" id="rentForm">
+                    <?php
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        $_SESSION['rental_data'] = [
+                            'id_motocykla' => $id,
+                            'start_date' => $_POST['start_date'],
+                            'end_date' => $_POST['end_date'],
+                            'start_time' => $_POST['start_time'],
+                            'end_time' => $_POST['end_time']
+                        ];
+                    }
+                    ?>
                     <input type="hidden" name="id_motocykla" value="<?php echo $id; ?>">
                     <div class="date">
                         <div class="start-date">

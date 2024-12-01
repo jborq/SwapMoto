@@ -4,6 +4,8 @@ session_start();
 
 $base_path = '..';
 
+unset($_SESSION['rental_data']);
+
 $id_motocykla = isset($_POST['id_motocykla']) ? $_POST['id_motocykla'] : 0;
 $start_date = isset($_POST['start_date']) ? $_POST['start_date'] : '';
 $end_date = isset($_POST['end_date']) ? $_POST['end_date'] : '';

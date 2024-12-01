@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
     $redirect_url = isset($_POST['redirect_url']) ? $_POST['redirect_url'] : '../index.php';
 
-    
+
     $query = "SELECT IDużytkownika, Hasło FROM Użytkownicy WHERE Email = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param('s', $email);

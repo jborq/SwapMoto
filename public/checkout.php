@@ -4,11 +4,30 @@ session_start();
 
 $base_path = '..';
 
-$id_motocykla = isset($_POST['id_motocykla']) ? $_POST['id_motocykla'] : 0;
-$start_date = isset($_POST['start_date']) ? $_POST['start_date'] : '';
-$end_date = isset($_POST['end_date']) ? $_POST['end_date'] : '';
-$start_time = isset($_POST['start_time']) ? $_POST['start_time'] : '';
-$end_time = isset($_POST['end_time']) ? $_POST['end_time'] : '';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id_motocykla = isset($_POST['id_motocykla']) ? $_POST['id_motocykla'] : 0;
+    $start_date = isset($_POST['start_date']) ? $_POST['start_date'] : '';
+    $end_date = isset($_POST['end_date']) ? $_POST['end_date'] : '';
+    $start_time = isset($_POST['start_time']) ? $_POST['start_time'] : '';
+    $end_time = isset($_POST['end_time']) ? $_POST['end_time'] : '';
+    
+    $_SESSION['rental_data'] = [
+        'id_motocykla' => $id_motocykla,
+        'start_date' => $start_date,
+        'end_date' => $end_date,
+        'start_time' => $start_time,
+        'end_time' => $end_time
+    ];
+} elseif (isset($_SESSION['rental_data'])) {
+    $id_motocykla = $_SESSION['rental_data']['id_motocykla'];
+    $start_date = $_SESSION['rental_data']['start_date'];
+    $end_date = $_SESSION['rental_data']['end_date'];
+    $start_time = $_SESSION['rental_data']['start_time'];
+    $end_time = $_SESSION['rental_data']['end_time'];
+} else {
+    header('Location: ../index.php');
+    exit();
+}
 
 $query = "SELECT Motocykle.Marka, Motocykle.Model, Motocykle.Cena, Lokalizacje.Miasto, Lokalizacje.Adres
           FROM Motocykle 
