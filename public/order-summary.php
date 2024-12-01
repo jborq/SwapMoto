@@ -47,6 +47,28 @@ if ($start_date && $end_date) {
     $days = $interval->days + 1;
     $total_price = $days * $moto['Cena'];
 }
+
+if (isset($_SESSION['user_id'])) {
+    $query = "INSERT INTO Rezerwacje (IDużytkownika, IDmotocykla, Status_rezerwacji, 
+              Data_rozpoczęcia, Data_zakończenia, Godzina_odbioru, Godzina_oddania) 
+              VALUES (?, ?, 'trwa', ?, ?, ?, ?)";
+
+    $stmt = $conn->prepare($query);
+    $start_datetime = $start_date . ' ' . $start_time;
+    $end_datetime = $end_date . ' ' . $end_time;
+
+    $stmt->bind_param(
+        'iissss',
+        $_SESSION['user_id'],
+        $id_motocykla,
+        $start_datetime,
+        $end_datetime,
+        $start_time,
+        $end_time
+    );
+    $stmt->execute();
+}
+
 ?>
 
 <!DOCTYPE html>

@@ -1,0 +1,193 @@
+.container {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    background-color: #f0f0f0;
+    padding: 50px;
+}
+
+.content-container {
+    width: 100%;
+    max-width: 800px;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section {
+    margin-bottom: 40px;
+}
+
+.profile-info {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.profile-info p {
+    margin: 10px 0;
+}
+
+.reservation-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.reservation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.moto-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.moto-info img {
+    width: 100px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.9em;
+}
+
+.status-badge.trwa {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.status-badge.zrealizowana {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.reservation-details {
+    display: flex;
+    gap: 40px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.edit-btn {
+    background-color: #22535E;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-btn:hover {
+    background-color: #1a3f47;
+}
+
+.edit-form {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.form-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-buttons button[type="submit"] {
+    background-color: #22535E;
+    color: white;
+}
+
+.form-buttons button[type="button"] {
+    background-color: #6c757d;
+    color: white;
+}
+
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.alert.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    text-align: center;
+}
+
+.alert.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .content-container {
+        padding: 20px;
+    }
+
+    .reservation-header {
+        flex-direction: column;
+    }
+
+    .moto-info img {
+        width: 80px;
+    }
+
+    .reservation-details {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .reservation-status {
+        display: flex;
+        align-self: flex-start;
+    }
+
+    .info-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
