@@ -10,6 +10,7 @@ $end_date = isset($_POST['end_date']) ? $_POST['end_date'] : '';
 $start_time = isset($_POST['start_time']) ? $_POST['start_time'] : '';
 $end_time = isset($_POST['end_time']) ? $_POST['end_time'] : '';
 
+// Remove item from cart
 if (isset($_SESSION['cart'])) {
     foreach ($_SESSION['cart'] as $key => $item) {
         if (

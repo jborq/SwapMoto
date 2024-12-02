@@ -4,25 +4,47 @@ session_start();
 
 $base_path = '..';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id_motocykla = isset($_POST['id_motocykla']) ? $_POST['id_motocykla'] : 0;
-    $start_date = isset($_POST['start_date']) ? $_POST['start_date'] : '';
-    $end_date = isset($_POST['end_date']) ? $_POST['end_date'] : '';
-    $start_time = isset($_POST['start_time']) ? $_POST['start_time'] : '';
-    $end_time = isset($_POST['end_time']) ? $_POST['end_time'] : '';
+if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_SESSION['rental_data'])) {
+    // Save rental data to session
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $id_motocykla = isset($_POST['id_motocykla']) ? $_POST['id_motocykla'] : 0;
+        $start_date = isset($_POST['start_date']) ? $_POST['start_date'] : '';
+        $end_date = isset($_POST['end_date']) ? $_POST['end_date'] : '';
+        $start_time = isset($_POST['start_time']) ? $_POST['start_time'] : '';
+        $end_time = isset($_POST['end_time']) ? $_POST['end_time'] : '';
 
-    $_SESSION['rental_data'] = [
-        'id_motocykla' => $id_motocykla,
-        'start_date' => $start_date,
-        'end_date' => $end_date,
-        'start_time' => $start_time,
-        'end_time' => $end_time
-    ];
-
-    if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = array();
+        $_SESSION['rental_data'] = [
+            'id_motocykla' => $id_motocykla,
+            'start_date' => $start_date,
+            'end_date' => $end_date,
+            'start_time' => $start_time,
+            'end_time' => $end_time
+        ];
+    } else {
+        // Retrieve rental data from session
+        $id_motocykla = $_SESSION['rental_data']['id_motocykla'];
+        $start_date = $_SESSION['rental_data']['start_date'];
+        $end_date = $_SESSION['rental_data']['end_date'];
+        $start_time = $_SESSION['rental_data']['start_time'];
+        $end_time = $_SESSION['rental_data']['end_time'];
     }
 
+    // Add rental data to cart
+    // Check if user is logged in
+    if (isset($_SESSION['user_id'])) {
+        if (!isset($_SESSION['user_carts'][$_SESSION['user_id']])) {
+            $_SESSION['user_carts'][$_SESSION['user_id']] = array();
+        }
+        $cart = &$_SESSION['user_carts'][$_SESSION['user_id']];
+    } else {
+        // User is not logged in
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = array();
+        }
+        $cart = &$_SESSION['cart'];
+    }
+
+    // Check if item already exists in cart
     $exists = false;
     foreach ($_SESSION['cart'] as $item) {
         if (
@@ -37,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
+    // Add item to cart if it doesn't exist
     if (!$exists) {
         $_SESSION['cart'][] = $_SESSION['rental_data'];
     }
