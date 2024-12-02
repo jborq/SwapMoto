@@ -37,7 +37,7 @@ if (isset($_POST['remove_item'])) {
                 <p>Your cart is empty.</p>
             <?php else: ?>
                 <?php foreach ($_SESSION['cart'] as $index => $item):
-                    $query = "SELECT Marka, Model, Cena FROM Motocykle WHERE IDmotocykla = ?";
+                    $query = "SELECT Marka, Model, Cena, Zdjęcie FROM Motocykle WHERE IDmotocykla = ?";
                     $stmt = $conn->prepare($query);
                     $stmt->bind_param('i', $item['id_motocykla']);
                     $stmt->execute();
@@ -45,6 +45,9 @@ if (isset($_POST['remove_item'])) {
                     $moto = $result->fetch_assoc();
                 ?>
                     <div class="cart-item">
+                        <div class="item-image">
+                            <img src="../uploads/bikes/<?php echo $moto['Zdjęcie']; ?>" alt="Motorcycle">
+                        </div>
                         <div class="item-info">
                             <h3><?php echo htmlspecialchars($moto['Marka'] . ' ' . $moto['Model']); ?></h3>
                             <p>Pickup: <?php echo htmlspecialchars($item['start_date']); ?> at <?php echo htmlspecialchars($item['start_time']); ?></p>

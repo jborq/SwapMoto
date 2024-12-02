@@ -29,6 +29,16 @@
     margin-bottom: 20px;
 }
 
+.cart-item img {
+    width: 100px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.item-image {
+    padding-right: 10px;
+}
+
 .item-info {
     flex: 1;
 }
@@ -61,6 +71,10 @@
 
     .cart-item {
         flex-direction: column;
+    }
+
+    .cart-item h3{
+        text-align: center;
     }
 
     .item-info {
