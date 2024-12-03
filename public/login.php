@@ -13,7 +13,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $original_email = $_POST['email'];
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $password = $_POST['password'];
+
+    // Redirect to previous page or index if previous page is login or register
     $redirect_url = isset($_POST['redirect_url']) ? $_POST['redirect_url'] : '../index.php';
+    if (strpos($redirect_url, 'register.php') !== false || strpos($redirect_url, 'login.php') !== false) {
+        $redirect_url = '../index.php';
+    }
 
     // Validate email
     if ($original_email != $email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
