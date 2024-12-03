@@ -273,6 +273,15 @@ h3 {
     margin: 0;
 }
 
+/* Validation */
+.validation-error {
+    max-width: 130px;
+    text-align: center;
+    color: #721c24;
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
 @media (max-width: 960px) {
     .content {
         padding-left: 10px;
