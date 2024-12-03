@@ -63,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_SESSION['rental_data'])) {
     if (!$exists) {
         $_SESSION['cart'][] = $_SESSION['rental_data'];
     }
+    
 } else {
     header('Location: ../index.php');
     exit();

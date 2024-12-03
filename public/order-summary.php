@@ -10,6 +10,13 @@ $end_date = isset($_POST['end_date']) ? $_POST['end_date'] : '';
 $start_time = isset($_POST['start_time']) ? $_POST['start_time'] : '';
 $end_time = isset($_POST['end_time']) ? $_POST['end_time'] : '';
 
+$first_name = htmlspecialchars(trim($_POST['first_name']));
+$last_name = htmlspecialchars(trim($_POST['last_name']));
+$email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+$phone = htmlspecialchars(trim($_POST['phone']));
+$dob = $_POST['dob'];
+$license = $_POST['license'];
+
 // Remove item from cart
 if (isset($_SESSION['cart'])) {
     foreach ($_SESSION['cart'] as $key => $item) {
@@ -51,21 +58,30 @@ if ($start_date && $end_date) {
 
 if (isset($_SESSION['user_id'])) {
     $query = "INSERT INTO Rezerwacje (IDużytkownika, IDmotocykla, Status_rezerwacji, 
-              Data_rozpoczęcia, Data_zakończenia, Godzina_odbioru, Godzina_oddania) 
-              VALUES (?, ?, 'trwa', ?, ?, ?, ?)";
+              Data_rozpoczęcia, Data_zakończenia, Godzina_odbioru, Godzina_oddania, 
+              Imię_kierowcy, Nazwisko_kierowcy, Email_kierowcy, Telefon_kierowcy, 
+              Data_urodzenia_kierowcy, Kategoria_prawa_jazdy, Całkowita_cena) 
+              VALUES (?, ?, 'trwa', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($query);
     $start_datetime = $start_date . ' ' . $start_time;
     $end_datetime = $end_date . ' ' . $end_time;
 
     $stmt->bind_param(
-        'iissss',
+        'iissssssssssd',
         $_SESSION['user_id'],
         $id_motocykla,
         $start_datetime,
         $end_datetime,
         $start_time,
-        $end_time
+        $end_time,
+        $first_name,
+        $last_name,
+        $email,
+        $phone,
+        $dob,
+        $license,
+        $total_price
     );
     $stmt->execute();
 }
