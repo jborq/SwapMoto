@@ -100,6 +100,29 @@ body {
     border-radius: 4px;
 }
 
+.input-group {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.validation-message {
+    text-align: center;
+    max-width: 200px;
+    color: #721c24;
+    font-size: 0.8em;
+    margin-top: 10px;
+    display: none;
+}
+
+input:invalid {
+    border-color: #721c24;
+}
+
+input:valid {
+    border-color: #28a745;
+}
+
 .footer {
     width: 100%;
     height: 60px;
