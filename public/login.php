@@ -13,7 +13,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $original_email = $_POST['email'];
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $password = $_POST['password'];
+
+    // Redirect to previous page or index if previous page is login or register
     $redirect_url = isset($_POST['redirect_url']) ? $_POST['redirect_url'] : '../index.php';
+    if (strpos($redirect_url, 'register.php') !== false || strpos($redirect_url, 'login.php') !== false) {
+        $redirect_url = '../index.php';
+    }
 
     // Validate email
     if ($original_email != $email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -29,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user = $result->fetch_assoc();
             if (password_verify($password, $user['Hasło'])) {
                 $_SESSION['user_id'] = $user['IDużytkownika'];
-            
+
                 // Restore user cart or create new one     
                 if (!isset($_SESSION['user_carts'])) {
                     $_SESSION['user_carts'] = array();
@@ -37,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (!isset($_SESSION['user_carts'][$user['IDużytkownika']])) {
                     $_SESSION['user_carts'][$user['IDużytkownika']] = array();
                 }
-                
+
                 // Move cart items to user cart
                 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     foreach ($_SESSION['cart'] as $item) {
@@ -45,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     }
                     unset($_SESSION['cart']);
                 }
-            
+
                 // Set user cart as current cart
                 $_SESSION['cart'] = &$_SESSION['user_carts'][$user['IDużytkownika']];
 
@@ -68,12 +73,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign in</title>
     <link rel="stylesheet" href="./css/login-style.css?v=<?php echo time(); ?>">
 </head>
+
 <body>
     <div class="logo">
         <a href="../index.php">
@@ -82,8 +89,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 
     <div class="login">
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" id="loginForm" novalidate>
             <h1>Sign in</h1>
+
             <?php if ($error_message): ?>
                 <p class="error"><?php echo htmlspecialchars($error_message); ?></p>
             <?php endif; ?>
@@ -91,14 +99,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <p class="success"><?php echo htmlspecialchars($success_message); ?></p>
             <?php endif; ?>
             <input type="hidden" name="redirect_url" value="<?php echo htmlspecialchars($_SERVER['HTTP_REFERER'] ?? '../index.php'); ?>">
-            <div>
-                <label for="email">Email:</label><br>
-                <input type="email" id="email" name="email" required><br>
+
+            <div class="input-group">
+                <label for="email">Email:</label>
+                <input type="email"
+                    id="email"
+                    name="email"
+                    required
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                <div class="validation-message" id="emailError"></div>
             </div>
-            <div>
-                <label for="password">Password:</label><br>
-                <input type="password" id="password" name="password" required><br>
+
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password"
+                    id="password"
+                    name="password"
+                    required
+                    minlength="8">
+                <div class="validation-message" id="passwordError"></div>
             </div>
+
             <button type="submit">Sign in</button>
             <p>Don't have an account? <a href="./register.php">Sign up</a></p>
         </form>
@@ -107,5 +128,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="footer">
         SwapMoto &copy 2024
     </div>
+
+    <script src="../src/loginValidation.js"></script>
+
 </body>
+
 </html>

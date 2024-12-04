@@ -201,6 +201,8 @@ function formatPhoneNumber($phoneNumber)
         &copy SwapMoto 2024
     </div>
 
+    <script src="../src/motoDetailsValidation.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const startDateInput = document.getElementById('start_date');

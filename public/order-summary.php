@@ -16,6 +16,58 @@ $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 $phone = htmlspecialchars(trim($_POST['phone']));
 $dob = $_POST['dob'];
 $license = $_POST['license'];
+$card_number = htmlspecialchars(trim($_POST['card_number']));
+$card_holder = htmlspecialchars(trim($_POST['card_holder']));
+$expiry_date = htmlspecialchars(trim($_POST['expiry_date']));
+$cvv = htmlspecialchars(trim($_POST['cvv']));
+
+// Valdation checks
+$errors = [];
+
+if (empty($first_name) || empty($last_name)) {
+    $errors[] = "First name and last name are required.";
+}
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors[] = "Invalid email format.";
+}
+
+if (!empty($phone) && !preg_match('/^\d{9}$/', $phone)) {
+    $errors[] = "Invalid phone number format.";
+}
+
+$dob_date = DateTime::createFromFormat('Y-m-d', $dob);
+if (!$dob_date || $dob_date > new DateTime('-13 years')) {
+    $errors[] = "You must be at least 13 years old.";
+}
+
+if (!in_array($license, ['A', 'A1', 'A2', 'B'])) {
+    $errors[] = "Invalid license category.";
+}
+
+if (!preg_match('/^\d{16}$/', str_replace(' ', '', $card_number))) {
+    $errors[] = "Invalid card number format.";
+}
+
+if (empty($card_holder)) {
+    $errors[] = "Card holder name is required.";
+}
+
+$expiry_parts = explode('/', $expiry_date);
+if (count($expiry_parts) !== 2 || !checkdate($expiry_parts[0], 1, 2000 + $expiry_parts[1])) {
+    $errors[] = "Invalid expiry date format.";
+}
+
+if (!preg_match('/^\d{3,4}$/', $cvv)) {
+    $errors[] = "Invalid CVV format.";
+}
+
+if (!empty($errors)) {
+    foreach ($errors as $error) {
+        echo "<p>$error</p>";
+    }
+    exit();
+}
 
 // Remove item from cart
 if (isset($_SESSION['cart'])) {
@@ -56,35 +108,35 @@ if ($start_date && $end_date) {
     $total_price = $days * $moto['Cena'];
 }
 
-if (isset($_SESSION['user_id'])) {
-    $query = "INSERT INTO Rezerwacje (IDużytkownika, IDmotocykla, Status_rezerwacji, 
-              Data_rozpoczęcia, Data_zakończenia, Godzina_odbioru, Godzina_oddania, 
-              Imię_kierowcy, Nazwisko_kierowcy, Email_kierowcy, Telefon_kierowcy, 
-              Data_urodzenia_kierowcy, Kategoria_prawa_jazdy, Całkowita_cena) 
-              VALUES (?, ?, 'trwa', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 2;
 
-    $stmt = $conn->prepare($query);
-    $start_datetime = $start_date . ' ' . $start_time;
-    $end_datetime = $end_date . ' ' . $end_time;
+$query = "INSERT INTO Rezerwacje (IDużytkownika, IDmotocykla, Status_rezerwacji, 
+Data_rozpoczęcia, Data_zakończenia, Godzina_odbioru, Godzina_oddania, 
+Imię_kierowcy, Nazwisko_kierowcy, Email_kierowcy, Telefon_kierowcy, 
+Data_urodzenia_kierowcy, Kategoria_prawa_jazdy, Całkowita_cena) 
+VALUES (?, ?, 'trwa', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    $stmt->bind_param(
-        'iissssssssssd',
-        $_SESSION['user_id'],
-        $id_motocykla,
-        $start_datetime,
-        $end_datetime,
-        $start_time,
-        $end_time,
-        $first_name,
-        $last_name,
-        $email,
-        $phone,
-        $dob,
-        $license,
-        $total_price
-    );
-    $stmt->execute();
-}
+$stmt = $conn->prepare($query);
+$start_datetime = $start_date . ' ' . $start_time;
+$end_datetime = $end_date . ' ' . $end_time;
+
+$stmt->bind_param(
+    'iissssssssssd',
+    $user_id,
+    $id_motocykla,
+    $start_datetime,
+    $end_datetime,
+    $start_time,
+    $end_time,
+    $first_name,
+    $last_name,
+    $email,
+    $phone,
+    $dob,
+    $license,
+    $total_price
+);
+$stmt->execute();
 
 ?>
 

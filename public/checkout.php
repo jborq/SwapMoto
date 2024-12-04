@@ -63,7 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_SESSION['rental_data'])) {
     if (!$exists) {
         $_SESSION['cart'][] = $_SESSION['rental_data'];
     }
-    
 } else {
     header('Location: ../index.php');
     exit();
@@ -104,7 +103,7 @@ if ($start_date && $end_date) {
 
 <body>
     <?php include '../partials/navbar.php'; ?>
-    <form action="order-summary.php" method="post">
+    <form action="order-summary.php" method="post" id="checkoutForm" novalidate>
         <div class="container">
             <div class="content-container">
                 <h1>Reservation details</h1>
@@ -124,15 +123,29 @@ if ($start_date && $end_date) {
                             </div>
                             <div class="form-group">
                                 <label for="email">Email *</label>
-                                <input type="email" id="email" name="email" required>
+                                <input type="email"
+                                    id="email"
+                                    name="email"
+                                    required
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                                <div class="validation-message" id="emailError"></div>
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone</label>
-                                <input type="tel" id="phone" name="phone" required>
+                                <input type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    pattern="\d{9}">
+                                <div class="validation-message" id="phoneError"></div>
                             </div>
                             <div class="form-group">
                                 <label for="dob">Date of Birth *</label>
-                                <input type="date" id="dob" name="dob" required>
+                                <input type="date"
+                                    id="dob"
+                                    name="dob"
+                                    required
+                                    max="<?php echo date('Y-m-d', strtotime('-13 years')); ?>">
+                                <div class="validation-message" id="dobError"></div>
                             </div>
                             <div class="form-group">
                                 <label for="license">License category *</label>
@@ -150,20 +163,38 @@ if ($start_date && $end_date) {
                         <h3>Payment information</h3>
                         <div class=form-group-container>
                             <div class="form-group">
-                                <label for="card_number">Card number *</label>
-                                <input type="text" id="card_number" name="card_number" required>
+                                <label for="card_number">Card Number *</label>
+                                <input type="text"
+                                    id="card_number"
+                                    name="card_number"
+                                    required
+                                    pattern="\d{4}\s\d{4}\s\d{4}\s\d{4}"
+                                    maxlength="19">
+                                <div class="validation-message" id="cardNumberError"></div>
                             </div>
                             <div class="form-group">
                                 <label for="card_holder">Card holder *</label>
                                 <input type="text" id="card_holder" name="card_holder" required>
                             </div>
                             <div class="form-group">
-                                <label for="expiry_date">Expiry date *</label>
-                                <input type="text" id="expiry_date" name="expiry_date" required>
+                                <label for="expiry_date">Expiry Date (MM/YY) *</label>
+                                <input type="text"
+                                    id="expiry_date"
+                                    name="expiry_date"
+                                    required
+                                    pattern="(0[1-9]|1[0-2])\/([0-9]{2})"
+                                    maxlength="5">
+                                <div class="validation-message" id="expiryDateError"></div>
                             </div>
                             <div class="form-group">
                                 <label for="cvv">CVV *</label>
-                                <input type="text" id="cvv" name="cvv" required>
+                                <input type="text"
+                                    id="cvv"
+                                    name="cvv"
+                                    required
+                                    pattern="[0-9]{3,4}"
+                                    maxlength="4">
+                                <div class="validation-message" id="cvvError"></div>
                             </div>
                         </div>
                     </div>
@@ -218,6 +249,9 @@ if ($start_date && $end_date) {
     <div class="footer-container">
         &copy SwapMoto 2024
     </div>
+
+    <script src="../src/checkoutValidation.js"></script>
+
 </body>
 
 </html>

@@ -17,28 +17,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($original_email != $email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error_message = "Invalid email format";
     }
+    // Validate first name
+    elseif (empty($firstName) || !preg_match('/^[A-Za-z\s-]+$/', $firstName)) {
+        $error_message = "Please enter a valid first name";
+    }
+    // Validate last name
+    elseif (empty($lastName) || !preg_match('/^[A-Za-z\s-]+$/', $lastName)) {
+        $error_message = "Please enter a valid last name";
+    }
     // Check password strength
-    elseif (strlen($password) < 8) {
-        $error_message = "Password must be at least 8 characters long";
+    elseif (strlen($password) < 8 || !preg_match('/[A-Z]/', $password) || !preg_match('/[!@#$%^&*]/', $password)) {
+        $error_message = "Password must be at least 8 characters long, contain at least one uppercase letter and one special character";
     }
     // Verify passwords match
     elseif ($password !== $confirm_password) {
         $error_message = "Passwords do not match";
-    }
-    else {
+    } else {
         // Check if email already exists
         $query = "SELECT IDużytkownika FROM Użytkownicy WHERE Email = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $result = $stmt->get_result();
-        
+
         if ($result->num_rows > 0) {
             $error_message = "Email already registered";
         } else {
             // Hash password
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            
+
             try {
                 $conn->begin_transaction();
 
@@ -49,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt->execute();
 
                 $conn->commit();
-                
+
                 // Redirect to login page
                 header('Location: login.php?registration=success');
                 exit();
@@ -64,12 +71,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign up</title>
     <link rel="stylesheet" href="./css/login-style.css?v=<?php echo time(); ?>">
 </head>
+
 <body>
     <div class="logo">
         <a href="../index.php">
@@ -78,34 +87,61 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 
     <div class="login">
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" id="registerForm" novalidate>
             <h1>Sign up</h1>
             <?php if ($error_message): ?>
                 <p class="error"><?php echo $error_message; ?></p>
             <?php endif; ?>
-            <div>
-                <label for="first_name">First Name:</label><br>
-                <input type="text" id="first_name" name="first_name" required><br>
+
+            <div class="input-group">
+                <label for="first_name">First Name:</label>
+                <input type="text"
+                    id="first_name"
+                    name="first_name"
+                    pattern="[A-Za-z ]+"
+                    required>
+                <div class="validation-message" id="firstNameError"></div>
             </div>
-            <div>
-                <label for="last_name">Last Name:</label><br>
-                <input type="text" id="last_name" name="last_name" required><br>
+
+            <div class="input-group">
+                <label for="last_name">Last Name:</label>
+                <input type="text"
+                    id="last_name"
+                    name="last_name"
+                    pattern="[A-Za-z ]+"
+                    required>
+                <div class="validation-message" id="lastNameError"></div>
             </div>
-            <div>
-                <label for="email">Email:</label><br>
-                <input type="email" id="email" name="email" required><br>
+
+            <div class="input-group">
+                <label for="email">Email:</label>
+                <input type="email"
+                    id="email"
+                    name="email"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    required>
+                <div class="validation-message" id="emailError"></div>
             </div>
-            <div>
-                <label for="password">Password:</label><br>
-                <input type="password" id="password" name="password" 
-                       pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}" 
-                       title="Password must be at least 8 characters long and contain uppercase, lowercase and special characters"
-                       required><br>
+
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password"
+                    id="password"
+                    name="password"
+                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}"
+                    required>
+                <div class="validation-message" id="passwordError"></div>
             </div>
-            <div>
-                <label for="confirm_password">Confirm password:</label><br>
-                <input type="password" id="confirm_password" name="confirm_password" required><br>
+
+            <div class="input-group">
+                <label for="confirm_password">Confirm password:</label>
+                <input type="password"
+                    id="confirm_password"
+                    name="confirm_password"
+                    required>
+                <div class="validation-message" id="confirmPasswordError"></div>
             </div>
+
             <button type="submit">Sign up</button>
             <p>Already have an account? <a href="./login.php">Sign in</a></p>
         </form>
@@ -114,5 +150,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="footer">
         SwapMoto &copy 2024
     </div>
+
+    <script src="../src/registerValidation.js"></script>
+
 </body>
+
 </html>
