@@ -241,11 +241,16 @@ document.addEventListener('DOMContentLoaded', function() {
         // Additional expiry date validation
         const [month, year] = fields.expiryDate.value.split('/');
         const expiry = new Date(2000 + parseInt(year), parseInt(month) - 1);
-        if (expiry < today) {
+        if (parseInt(month) < 1 || parseInt(month) > 12) {
+            isValid = false;
+            errors.expiryDate.textContent = errorMessages.expiryDate.invalid;
+            errors.expiryDate.style.display = 'block';
+        } else if (expiry < today) {
             isValid = false;
             errors.expiryDate.textContent = errorMessages.expiryDate.invalid;
             errors.expiryDate.style.display = 'block';
         }
+
 
         if (!isValid) {
             event.preventDefault();
