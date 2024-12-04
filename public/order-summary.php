@@ -17,6 +17,54 @@ $phone = htmlspecialchars(trim($_POST['phone']));
 $dob = $_POST['dob'];
 $license = $_POST['license'];
 
+// Valdation checks
+$errors = [];
+
+if (empty($first_name) || empty($last_name)) {
+    $errors[] = "First name and last name are required.";
+}
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors[] = "Invalid email format.";
+}
+
+if (!empty($phone) && !preg_match('/^\d{9}$/', $phone)) {
+    $errors[] = "Invalid phone number format.";
+}
+
+$dob_date = DateTime::createFromFormat('Y-m-d', $dob);
+if (!$dob_date || $dob_date > new DateTime('-13 years')) {
+    $errors[] = "You must be at least 13 years old.";
+}
+
+if (!in_array($license, ['A', 'A1', 'A2', 'B'])) {
+    $errors[] = "Invalid license category.";
+}
+
+if (!preg_match('/^\d{16}$/', str_replace(' ', '', $card_number))) {
+    $errors[] = "Invalid card number format.";
+}
+
+if (empty($card_holder)) {
+    $errors[] = "Card holder name is required.";
+}
+
+$expiry_parts = explode('/', $expiry_date);
+if (count($expiry_parts) !== 2 || !checkdate($expiry_parts[0], 1, 2000 + $expiry_parts[1])) {
+    $errors[] = "Invalid expiry date format.";
+}
+
+if (!preg_match('/^\d{3,4}$/', $cvv)) {
+    $errors[] = "Invalid CVV format.";
+}
+
+if (!empty($errors)) {
+    foreach ($errors as $error) {
+        echo "<p>$error</p>";
+    }
+    exit();
+}
+
 // Remove item from cart
 if (isset($_SESSION['cart'])) {
     foreach ($_SESSION['cart'] as $key => $item) {

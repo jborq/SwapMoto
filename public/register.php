@@ -17,9 +17,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($original_email != $email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error_message = "Invalid email format";
     }
+    // Validate first name
+    elseif (empty($firstName) || !preg_match('/^[A-Za-z\s-]+$/', $firstName)) {
+        $error_message = "Please enter a valid first name";
+    }
+    // Validate last name
+    elseif (empty($lastName) || !preg_match('/^[A-Za-z\s-]+$/', $lastName)) {
+        $error_message = "Please enter a valid last name";
+    }
     // Check password strength
-    elseif (strlen($password) < 8) {
-        $error_message = "Password must be at least 8 characters long";
+    elseif (strlen($password) < 8 || !preg_match('/[A-Z]/', $password) || !preg_match('/[!@#$%^&*]/', $password)) {
+        $error_message = "Password must be at least 8 characters long, contain at least one uppercase letter and one special character";
     }
     // Verify passwords match
     elseif ($password !== $confirm_password) {
