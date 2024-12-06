@@ -111,10 +111,10 @@ if ($start_date && $end_date) {
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 2;
 
 $query = "INSERT INTO Rezerwacje (IDużytkownika, IDmotocykla, Status_rezerwacji, 
-Data_rozpoczęcia, Data_zakończenia, Godzina_odbioru, Godzina_oddania, 
-Imię_kierowcy, Nazwisko_kierowcy, Email_kierowcy, Telefon_kierowcy, 
-Data_urodzenia_kierowcy, Kategoria_prawa_jazdy, Całkowita_cena) 
-VALUES (?, ?, 'trwa', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+          Data_rozpoczęcia, Data_zakończenia, Godzina_odbioru, Godzina_oddania, 
+          Imię_kierowcy, Nazwisko_kierowcy, Email_kierowcy, Telefon_kierowcy, 
+          Data_urodzenia_kierowcy, Kategoria_prawa_jazdy, Całkowita_cena) 
+          VALUES (?, ?, 'trwa', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($query);
 $start_datetime = $start_date . ' ' . $start_time;

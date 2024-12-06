@@ -8,8 +8,8 @@ if (!isset($_SESSION['user_id']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $user_id = $_SESSION['user_id'];
-$phone = !empty($_POST['phone']) ? $_POST['phone'] : null;
-$address = !empty($_POST['address']) ? $_POST['address'] : null;
+$phone = !empty($_POST['phone']) ? htmlspecialchars(trim($_POST['phone'])) : null;
+$address = !empty($_POST['address']) ? htmlspecialchars(trim($_POST['address'])) : null;
 
 try {
     $conn->begin_transaction();

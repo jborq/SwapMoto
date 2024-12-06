@@ -52,8 +52,8 @@ function formatPhoneNumber($phoneNumber)
     <div class="content-container">
         <div class="content">
             <div class="moto-container">
-                <img src="<?php echo '../uploads/bikes/' . $moto['Zdjęcie']; ?>" alt="<?php echo $moto['Marka'] . ' ' . $moto['Model']; ?>">
-                <h1><?php echo $moto['Marka'] . ' ' . $moto['Model']; ?></h1>
+                <img src="<?php echo htmlspecialchars('../uploads/bikes/' . $moto['Zdjęcie']); ?>" alt="<?php echo htmlspecialchars($moto['Marka'] . ' ' . $moto['Model']); ?>">
+                <h1><?php echo htmlspecialchars($moto['Marka'] . ' ' . $moto['Model']); ?></h1>
                 <div class="moto-info">
                     <div class="moto-deatils">
                         <img src="./icons/motorbike.png" alt="Motorcycle Icon" />
@@ -61,11 +61,11 @@ function formatPhoneNumber($phoneNumber)
                     </div>
                     <div class="moto-deatils">
                         <img src="./icons/calendar.png" alt="Calendar Icon" />
-                        <p><?php echo $moto['Rok_produkcji']; ?></p>
+                        <p><?php echo htmlspecialchars($moto['Rok_produkcji']); ?></p>
                     </div>
                     <div class="moto-deatils">
                         <img src="./icons/driving_license.png" alt="Driving License Icon" />
-                        <p><?php echo $moto['Kategoria_prawa_jazdy']; ?></p>
+                        <p><?php echo htmlspecialchars($moto['Kategoria_prawa_jazdy']); ?></p>
                     </div>
                 </div>
             </div>
@@ -95,19 +95,19 @@ function formatPhoneNumber($phoneNumber)
                 </div>
             </div>
             <div class="location-container">
-                <h3>Rental Office in <?php echo $moto['Miasto']; ?></h3>
+                <h3>Rental Office in <?php echo htmlspecialchars($moto['Miasto']); ?></h3>
                 <div class="location-info">
                     <div class="location-details">
                         <img src="./icons/location.png" alt="Location Icon" />
-                        <p><?php echo $moto['Adres']; ?></p>
+                        <p><?php echo htmlspecialchars($moto['Adres']); ?></p>
                     </div>
                     <div class="location-details">
                         <img src="./icons/telephone.png" alt="Phone Icon" />
-                        <p>+48 <?php echo formatPhoneNumber($moto['Numer_kontaktowy']); ?></p>
+                        <p>+48 <?php echo htmlspecialchars(formatPhoneNumber($moto['Numer_kontaktowy'])); ?></p>
                     </div>
                     <div class="location-details">
                         <img src="./icons/clock.png" alt="Clock Icon" />
-                        <p><?php echo substr($moto['Godzina_otwarcia'], 0, 5) . ' - ' . substr($moto['Godzina_zamknięcia'], 0, 5); ?></p>
+                        <p><?php echo htmlspecialchars(substr($moto['Godzina_otwarcia'], 0, 5) . ' - ' . substr($moto['Godzina_zamknięcia'], 0, 5)); ?></p>
                     </div>
                 </div>
             </div>
@@ -117,10 +117,10 @@ function formatPhoneNumber($phoneNumber)
                     <?php foreach ($reviews as $review): ?>
                         <div class="review">
                             <div class="review-header">
-                                <span class="name"><?php echo $review['Imię']; ?></span>
+                                <span class="name"><?php echo htmlspecialchars($review['Imię']); ?></span>
                                 <div>
                                     <span>&#x2022</span>
-                                    <span><?php echo substr($review['Data_dodania'], 0, 10); ?></span>
+                                    <span><?php echo htmlspecialchars(substr($review['Data_dodania'], 0, 10)); ?></span>
                                     <span>&#x2022</span>
                                     <span class="star">
                                         <?php for ($i = 0; $i < $review['Ocena']; $i++): ?>
@@ -133,7 +133,7 @@ function formatPhoneNumber($phoneNumber)
                                 </div>
                             </div>
                             <div class="review-body">
-                                <p><?php echo $review['Komentarz']; ?></p>
+                                <p><?php echo htmlspecialchars($review['Komentarz']); ?></p>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -144,8 +144,8 @@ function formatPhoneNumber($phoneNumber)
         </div>
         <div class="rent-container">
             <div class="rent-form">
-                <p class="main-text" id="total-price"><?php echo $moto['Cena']; ?> zł</p>
-                <p class="sub-text">(<?php echo $moto['Cena']; ?> zł per day)</p>
+                <p class="main-text" id="total-price"><?php echo htmlspecialchars($moto['Cena']); ?> zł</p>
+                <p class="sub-text">(<?php echo htmlspecialchars($moto['Cena']); ?> zł per day)</p>
                 <hr>
                 <form action="checkout.php" method="post" id="rentForm">
                     <?php
@@ -170,7 +170,7 @@ function formatPhoneNumber($phoneNumber)
                         ];
                     }
                     ?>
-                    <input type="hidden" name="id_motocykla" value="<?php echo $id; ?>">
+                    <input type="hidden" name="id_motocykla" value="<?php echo htmlspecialchars($id); ?>">
                     <div class="date">
                         <div class="start-date">
                             <label for="start-date">Start Date:</label>

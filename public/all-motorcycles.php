@@ -101,53 +101,53 @@ if ($result->num_rows > 0) {
                     <div class="location-filter">
                         <label for="location">Pickup location:</label>
                         <select name="location" id="location">
-                            <option value="all" <?php echo $location === 'all' ? 'selected' : ''; ?>>All</option>
-                            <option value="warszawa" <?php echo $location === 'warszawa' ? 'selected' : ''; ?>>Warszawa</option>
-                            <option value="kraków" <?php echo $location === 'kraków' ? 'selected' : ''; ?>>Kraków</option>
-                            <option value="łódź" <?php echo $location === 'łódź' ? 'selected' : ''; ?>>Łódź</option>
-                            <option value="gdańsk" <?php echo $location === 'gdańsk' ? 'selected' : ''; ?>>Gdańsk</option>
+                            <option value="all" <?php echo htmlspecialchars($location) === 'all' ? 'selected' : ''; ?>>All</option>
+                            <option value="warszawa" <?php echo htmlspecialchars($location) === 'warszawa' ? 'selected' : ''; ?>>Warszawa</option>
+                            <option value="kraków" <?php echo htmlspecialchars($location) === 'kraków' ? 'selected' : ''; ?>>Kraków</option>
+                            <option value="łódź" <?php echo htmlspecialchars($location) === 'łódź' ? 'selected' : ''; ?>>Łódź</option>
+                            <option value="gdańsk" <?php echo htmlspecialchars($location) === 'gdańsk' ? 'selected' : ''; ?>>Gdańsk</option>
                         </select>
                     </div>
                     <div class="moto-type-filter">
                         <label for="type">Motorcycle type:</label>
                         <select name="type" id="type">
-                            <option value="all" <?php echo $type === 'all' ? 'selected' : ''; ?>>All</option>
-                            <option value="1" <?php echo $type === '1' ? 'selected' : ''; ?>>Motorcycle</option>
-                            <option value="2" <?php echo $type === '2' ? 'selected' : ''; ?>>Motorcycle 125cc</option>
-                            <option value="3" <?php echo $type === '3' ? 'selected' : ''; ?>>Scooter</option>
+                            <option value="all" <?php echo htmlspecialchars($type) === 'all' ? 'selected' : ''; ?>>All</option>
+                            <option value="1" <?php echo htmlspecialchars($type) === '1' ? 'selected' : ''; ?>>Motorcycle</option>
+                            <option value="2" <?php echo htmlspecialchars($type) === '2' ? 'selected' : ''; ?>>Motorcycle 125cc</option>
+                            <option value="3" <?php echo htmlspecialchars($type) === '3' ? 'selected' : ''; ?>>Scooter</option>
                         </select>
                     </div>
                     <div class="license-filter">
                         <label for="license">License:</label>
                         <select name="license" id="license">
-                            <option value="all" <?php echo $license === 'all' ? 'selected' : ''; ?>>All</option>
-                            <option value="a" <?php echo $license === 'a' ? 'selected' : ''; ?>>A</option>
-                            <option value="a2" <?php echo $license === 'a2' ? 'selected' : ''; ?>>A2</option>
-                            <option value="a1" <?php echo $license === 'a1' ? 'selected' : ''; ?>>A1</option>
-                            <option value="am" <?php echo $license === 'am' ? 'selected' : ''; ?>>AM</option>
+                            <option value="all" <?php echo htmlspecialchars($license) === 'all' ? 'selected' : ''; ?>>All</option>
+                            <option value="a" <?php echo htmlspecialchars($license) === 'a' ? 'selected' : ''; ?>>A</option>
+                            <option value="a2" <?php echo htmlspecialchars($license) === 'a2' ? 'selected' : ''; ?>>A2</option>
+                            <option value="a1" <?php echo htmlspecialchars($license) === 'a1' ? 'selected' : ''; ?>>A1</option>
+                            <option value="am" <?php echo htmlspecialchars($license) === 'am' ? 'selected' : ''; ?>>AM</option>
                         </select>
                     </div>
                     <div class="brand-filter">
                         <label for="brand">Brand:</label>
                         <select name="brand" id="brand">
-                            <option value="all" <?php echo $brand === 'all' ? 'selected' : ''; ?>>All</option>
-                            <option value="ducati" <?php echo $brand === 'ducati' ? 'selected' : ''; ?>>Ducati</option>
-                            <option value="suzuki" <?php echo $brand === 'suzuki' ? 'selected' : ''; ?>>Suzuki</option>
-                            <option value="honda" <?php echo $brand === 'honda' ? 'selected' : ''; ?>>Honda</option>
-                            <option value="triumph" <?php echo $brand === 'triumph' ? 'selected' : ''; ?>>Triumph</option>
-                            <option value="yamaha" <?php echo $brand === 'yamaha' ? 'selected' : ''; ?>>Yamaha</option>
-                            <option value="bmw" <?php echo $brand === 'bmw' ? 'selected' : ''; ?>>BMW</option>
-                            <option value="kawasaki" <?php echo $brand === 'kawasaki' ? 'selected' : ''; ?>>Kawasaki</option>
-                            <option value="harley-davidson" <?php echo $brand === 'harley-davidson' ? 'selected' : ''; ?>>Harley-Davidson</option>
-                            <option value="indian" <?php echo $brand === 'indian' ? 'selected' : ''; ?>>Indian</option>
-                            <option value="moto-guzzi" <?php echo $brand === 'moto-guzzi' ? 'selected' : ''; ?>>Moto Guzzi</option>
-                            <option value="ktm" <?php echo $brand === 'ktm' ? 'selected' : ''; ?>>KTM</option>
-                            <option value="aprilia" <?php echo $brand === 'aprilia' ? 'selected' : ''; ?>>Aprilia</option>
-                            <option value="piaggio" <?php echo $brand === 'piaggio' ? 'selected' : ''; ?>>Piaggio</option>
-                            <option value="kymco" <?php echo $brand === 'kymco' ? 'selected' : ''; ?>>Kymco</option>
-                            <option value="vespa" <?php echo $brand === 'vespa' ? 'selected' : ''; ?>>Vespa</option>
-                            <option value="sym" <?php echo $brand === 'sym' ? 'selected' : ''; ?>>SYM</option>
-                            <option value="peugeot" <?php echo $brand === 'peugeot' ? 'selected' : ''; ?>>Peugeot</option>
+                            <option value="all" <?php echo htmlspecialchars($brand) === 'all' ? 'selected' : ''; ?>>All</option>
+                            <option value="ducati" <?php echo htmlspecialchars($brand) === 'ducati' ? 'selected' : ''; ?>>Ducati</option>
+                            <option value="suzuki" <?php echo htmlspecialchars($brand) === 'suzuki' ? 'selected' : ''; ?>>Suzuki</option>
+                            <option value="honda" <?php echo htmlspecialchars($brand) === 'honda' ? 'selected' : ''; ?>>Honda</option>
+                            <option value="triumph" <?php echo htmlspecialchars($brand) === 'triumph' ? 'selected' : ''; ?>>Triumph</option>
+                            <option value="yamaha" <?php echo htmlspecialchars($brand) === 'yamaha' ? 'selected' : ''; ?>>Yamaha</option>
+                            <option value="bmw" <?php echo htmlspecialchars($brand) === 'bmw' ? 'selected' : ''; ?>>BMW</option>
+                            <option value="kawasaki" <?php echo htmlspecialchars($brand) === 'kawasaki' ? 'selected' : ''; ?>>Kawasaki</option>
+                            <option value="harley-davidson" <?php echo htmlspecialchars($brand) === 'harley-davidson' ? 'selected' : ''; ?>>Harley-Davidson</option>
+                            <option value="indian" <?php echo htmlspecialchars($brand) === 'indian' ? 'selected' : ''; ?>>Indian</option>
+                            <option value="moto-guzzi" <?php echo htmlspecialchars($brand) === 'moto-guzzi' ? 'selected' : ''; ?>>Moto Guzzi</option>
+                            <option value="ktm" <?php echo htmlspecialchars($brand) === 'ktm' ? 'selected' : ''; ?>>KTM</option>
+                            <option value="aprilia" <?php echo htmlspecialchars($brand) === 'aprilia' ? 'selected' : ''; ?>>Aprilia</option>
+                            <option value="piaggio" <?php echo htmlspecialchars($brand) === 'piaggio' ? 'selected' : ''; ?>>Piaggio</option>
+                            <option value="kymco" <?php echo htmlspecialchars($brand) === 'kymco' ? 'selected' : ''; ?>>Kymco</option>
+                            <option value="vespa" <?php echo htmlspecialchars($brand) === 'vespa' ? 'selected' : ''; ?>>Vespa</option>
+                            <option value="sym" <?php echo htmlspecialchars($brand) === 'sym' ? 'selected' : ''; ?>>SYM</option>
+                            <option value="peugeot" <?php echo htmlspecialchars($brand) === 'peugeot' ? 'selected' : ''; ?>>Peugeot</option>
                         </select>
                     </div>
                     <div class="price-filter">
@@ -199,20 +199,20 @@ if ($result->num_rows > 0) {
                         <div class="sort-container">
                             <label for="sort">Sort by:</label>
                             <select name="sort" id="sort">
-                                <option value="most-recommended" <?php echo $sort === 'most-recommended' ? 'selected' : ''; ?>>Most recommended</option>
-                                <option value="price" <?php echo $sort === 'price' ? 'selected' : ''; ?>>Price (lowest)</option>
-                                <option value="priceDesc" <?php echo $sort === 'priceDesc' ? 'selected' : ''; ?>>Price (highest)</option>
+                                <option value="most-recommended" <?php echo htmlspecialchars($sort) === 'most-recommended' ? 'selected' : ''; ?>>Most recommended</option>
+                                <option value="price" <?php echo htmlspecialchars($sort) === 'price' ? 'selected' : ''; ?>>Price (lowest)</option>
+                                <option value="priceDesc" <?php echo htmlspecialchars($sort) === 'priceDesc' ? 'selected' : ''; ?>>Price (highest)</option>
                             </select>
                         </div>
                     </div>
                     <div class="moto-container">
                         <?php foreach ($motorcycle as $moto): ?>
                             <div class="moto-card">
-                                <a href="../public/motorcycle-details.php?id=<?php echo $moto['IDmotocykla']; ?>">
-                                    <img src="<?php echo '../uploads/bikes/' . $moto['Zdjęcie']; ?>" alt="<?php echo $moto['Marka'] . ' ' . $moto['Model']; ?>">
-                                    <h2><?php echo $moto['Marka'] . ' ' . $moto['Model']; ?></h2>
-                                    <p><?php echo $moto['Miasto']; ?></p>
-                                    <p><?php echo $moto['Cena']; ?> zł / day</p>
+                                <a href="../public/motorcycle-details.php?id=<?php echo htmlspecialchars($moto['IDmotocykla']); ?>">
+                                    <img src="<?php echo htmlspecialchars('../uploads/bikes/' . $moto['Zdjęcie']); ?>" alt="<?php echo htmlspecialchars($moto['Marka'] . ' ' . $moto['Model']); ?>">
+                                    <h2><?php echo htmlspecialchars($moto['Marka'] . ' ' . $moto['Model']); ?></h2>
+                                    <p><?php echo htmlspecialchars($moto['Miasto']); ?></p>
+                                    <p><?php echo htmlspecialchars($moto['Cena']); ?> zł / day</p>
                                 </a>
                             </div>
                         <?php endforeach; ?>

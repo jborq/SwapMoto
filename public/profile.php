@@ -92,30 +92,30 @@ $reservations = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
                         <div class="reservation-card">
                             <div class="reservation-header">
                                 <div class="moto-info">
-                                    <img src="<?php echo '../uploads/bikes/' . $reservation['Zdjęcie']; ?>"
-                                        alt="<?php echo $reservation['Marka'] . ' ' . $reservation['Model']; ?>">
+                                    <img src="<?php echo htmlspecialchars('../uploads/bikes/' . $reservation['Zdjęcie']); ?>"
+                                        alt="<?php echo htmlspecialchars($reservation['Marka'] . ' ' . $reservation['Model']); ?>">
                                     <div>
                                         <h3><?php echo htmlspecialchars($reservation['Marka'] . ' ' . $reservation['Model']); ?></h3>
                                         <p><?php echo htmlspecialchars($reservation['Miasto'] . ', ' . $reservation['Adres']); ?></p>
                                     </div>
                                 </div>
                                 <div class="reservation-status">
-                                    <span class="status-badge <?php echo $reservation['Status_rezerwacji']; ?>">
-                                        <?php echo ucfirst($reservation['Status_rezerwacji']); ?>
+                                    <span class="status-badge <?php echo htmlspecialchars($reservation['Status_rezerwacji']); ?>">
+                                        <?php echo htmlspecialchars(ucfirst($reservation['Status_rezerwacji'])); ?>
                                     </span>
                                 </div>
                             </div>
                             <div class="reservation-details">
                                 <div>
                                     <p><strong>Pickup:</strong><br>
-                                        <?php echo date('Y-m-d', strtotime($reservation['Data_rozpoczęcia'])); ?> at
-                                        <?php echo date('H:i', strtotime($reservation['Godzina_odbioru'])); ?>
+                                        <?php echo htmlspecialchars(date('Y-m-d', strtotime($reservation['Data_rozpoczęcia']))); ?> at
+                                        <?php echo htmlspecialchars(date('H:i', strtotime($reservation['Godzina_odbioru']))); ?>
                                     </p>
                                 </div>
                                 <div>
                                     <p><strong>Return:</strong><br>
-                                        <?php echo date('Y-m-d', strtotime($reservation['Data_zakończenia'])); ?> at
-                                        <?php echo date('H:i', strtotime($reservation['Godzina_oddania'])); ?>
+                                        <?php echo htmlspecialchars(date('Y-m-d', strtotime($reservation['Data_zakończenia']))); ?> at
+                                        <?php echo htmlspecialchars(date('H:i', strtotime($reservation['Godzina_oddania']))); ?>
                                     </p>
                                 </div>
                             </div>

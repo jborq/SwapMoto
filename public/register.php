@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" id="registerForm" novalidate>
             <h1>Sign up</h1>
             <?php if ($error_message): ?>
-                <p class="error"><?php echo $error_message; ?></p>
+                <p class="error"><?php echo htmlspecialchars($error_message, ENT_QUOTES, 'UTF-8'); ?></p>
             <?php endif; ?>
 
             <div class="input-group">

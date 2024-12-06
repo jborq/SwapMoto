@@ -46,7 +46,7 @@ if (isset($_POST['remove_item'])) {
                 ?>
                     <div class="cart-item">
                         <div class="item-image">
-                            <img src="../uploads/bikes/<?php echo $moto['Zdjęcie']; ?>" alt="Motorcycle">
+                            <img src="../uploads/bikes/<?php echo htmlspecialchars($moto['Zdjęcie']); ?>" alt="Motorcycle">
                         </div>
                         <div class="item-info">
                             <h3><?php echo htmlspecialchars($moto['Marka'] . ' ' . $moto['Model']); ?></h3>
@@ -56,15 +56,15 @@ if (isset($_POST['remove_item'])) {
                         </div>
                         <div class="item-actions">
                             <form method="post">
-                                <input type="hidden" name="remove_item" value="<?php echo $index; ?>">
+                                <input type="hidden" name="remove_item" value="<?php echo htmlspecialchars($index); ?>">
                                 <button type="submit" class="remove-btn">Remove</button>
                             </form>
                             <form action="checkout.php" method="post">
-                                <input type="hidden" name="id_motocykla" value="<?php echo $item['id_motocykla']; ?>">
-                                <input type="hidden" name="start_date" value="<?php echo $item['start_date']; ?>">
-                                <input type="hidden" name="end_date" value="<?php echo $item['end_date']; ?>">
-                                <input type="hidden" name="start_time" value="<?php echo $item['start_time']; ?>">
-                                <input type="hidden" name="end_time" value="<?php echo $item['end_time']; ?>">
+                                <input type="hidden" name="id_motocykla" value="<?php echo htmlspecialchars($item['id_motocykla']); ?>">
+                                <input type="hidden" name="start_date" value="<?php echo htmlspecialchars($item['start_date']); ?>">
+                                <input type="hidden" name="end_date" value="<?php echo htmlspecialchars($item['end_date']); ?>">
+                                <input type="hidden" name="start_time" value="<?php echo htmlspecialchars($item['start_time']); ?>">
+                                <input type="hidden" name="end_time" value="<?php echo htmlspecialchars($item['end_time']); ?>">
                                 <button type="submit">Continue Reservation</button>
                             </form>
                         </div>

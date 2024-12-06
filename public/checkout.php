@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_SESSION['rental_data'])) {
 
     // Check if item already exists in cart
     $exists = false;
-    foreach ($_SESSION['cart'] as $item) {
+    foreach ($cart as $item) {
         if (
             $item['id_motocykla'] == $id_motocykla &&
             $item['start_date'] == $start_date &&
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_SESSION['rental_data'])) {
 
     // Add item to cart if it doesn't exist
     if (!$exists) {
-        $_SESSION['cart'][] = $_SESSION['rental_data'];
+        $cart[] = $_SESSION['rental_data'];
     }
 } else {
     header('Location: ../index.php');
