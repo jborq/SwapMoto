@@ -72,7 +72,7 @@ $excluded_columns = [
             </div>
             <div class="detail-actions">
                 <button onclick="location.href='admin.php?table=<?php echo $table; ?>'">Back</button>
-                <button onclick="location.href='admin_edit.php?table=<?php echo $table; ?>&id=<?php echo $id; ?>'">Edit</button>
+                <button onclick="location.href='../public/admin-edit.php?table=<?php echo $table; ?>&id=<?php echo $id; ?>'">Edit</button>
             </div>
         </div>
     </div>
