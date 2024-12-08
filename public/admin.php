@@ -80,6 +80,22 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
         </div>
         <div class="content">
             <h1><?php echo $table_names[$selected_table]; ?></h1>
+            <?php if (isset($_SESSION['admin_success'])): ?>
+                <div class="alert success">
+                    <?php
+                    echo htmlspecialchars($_SESSION['admin_success']);
+                    unset($_SESSION['admin_success']);
+                    ?>
+                </div>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['admin_error'])): ?>
+                <div class="alert error">
+                    <?php
+                    echo htmlspecialchars($_SESSION['admin_error']);
+                    unset($_SESSION['admin_error']);
+                    ?>
+                </div>
+            <?php endif; ?>
             <div class="table-actions">
                 <button onclick="location.href='admin_add.php?table=<?php echo $selected_table; ?>'">
                     Add New Record
@@ -102,9 +118,9 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                                     <td><?php echo htmlspecialchars($row[$column]); ?></td>
                                 <?php endforeach; ?>
                                 <td class="actions" onclick="event.stopPropagation();">
-                                    <button onclick="location.href='admin_edit.php?table=<?php echo $selected_table; ?>&id=<?php echo $row[array_key_first($row)]; ?>'"
+                                    <button onclick="location.href='../public/admin-edit.php?table=<?php echo $selected_table; ?>&id=<?php echo $row[array_key_first($row)]; ?>'"
                                         class="action-btn edit-btn">Edit</button>
-                                    <button onclick="if(confirm('Are you sure you want to delete this record?')) location.href='admin_delete.php?table=<?php echo $selected_table; ?>&id=<?php echo $row[array_key_first($row)]; ?>'"
+                                    <button onclick="if(confirm('Are you sure you want to delete this record?')) location.href='../public/admin-delete.php?table=<?php echo $selected_table; ?>&id=<?php echo $row[array_key_first($row)]; ?>'"
                                         class="action-btn delete-btn">Delete</button>
                                 </td>
                             </tr>
