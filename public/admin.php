@@ -97,7 +97,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                 </div>
             <?php endif; ?>
             <div class="table-actions">
-                <button onclick="location.href='admin_add.php?table=<?php echo $selected_table; ?>'">
+                <button onclick="location.href='../public/admin-add.php?table=<?php echo $selected_table; ?>'">
                     Add New Record
                 </button>
             </div>

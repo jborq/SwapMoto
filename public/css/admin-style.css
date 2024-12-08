@@ -194,7 +194,7 @@ tr:hover td {
     border: 1px solid #f5c6cb;
 }
 
-/* Edit Form */
+/* Edit and Add Form */
 .edit-form-container {
     width: 100%;
     max-width: 800px;
@@ -221,11 +221,17 @@ tr:hover td {
 }
 
 .form-group input,
-.form-group select {
+.form-group select,
+.form-group textarea {
     width: 100%;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: vertical;
 }
 
 .form-actions {
@@ -240,6 +246,22 @@ tr:hover td {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.add-form-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    overflow-y: auto;
+    height: calc(100vh - 200px); 
+}
+
+.add-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-actions button[type="submit"] {
