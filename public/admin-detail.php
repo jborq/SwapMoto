@@ -59,7 +59,7 @@ $excluded_columns = [
     <?php include '../partials/navbar.php'; ?>
     <div class="admin-container">
         <div class="detail-view">
-            <h1>Detail View</h1>
+            <h1>Detailed View</h1>
             <div class="detail-card">
                 <?php foreach ($record as $key => $value): ?>
                     <?php if (!isset($excluded_columns[$table]) || !in_array($key, $excluded_columns[$table])): ?>

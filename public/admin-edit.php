@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fields = [];
         $types = '';
         $values = [];
-        
+
         foreach ($_POST as $key => $value) {
             if ($key !== 'submit' && $key !== $primary_key) {
                 $fields[] = "`$key` = ?";
@@ -58,10 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $values[] = $value;
             }
         }
-        
+
         $types .= 'i';
         $values[] = $id;
-        
+
         $query = "UPDATE $table SET " . implode(', ', $fields) . " WHERE $primary_key = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param($types, ...$values);
@@ -110,12 +110,14 @@ $field_types = [
 
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <title>Edit Record - SwapMoto Admin</title>
     <link rel="stylesheet" href="./css/admin-style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./css/navbar-footer.css?v=<?php echo time(); ?>">
 </head>
+
 <body>
     <?php include '../partials/navbar.php'; ?>
     <div class="admin-container">
@@ -125,20 +127,20 @@ $field_types = [
                 <?php foreach ($record as $field => $value): ?>
                     <?php if (!isset($excluded_fields[$table]) || !in_array($field, $excluded_fields[$table])): ?>
                         <div class="form-group">
-                            <label for="<?php echo $field; ?>"><?php echo $field; ?>:</label>
+                            <label for="<?php echo htmlspecialchars($field); ?>"><?php echo htmlspecialchars($field); ?>:</label>
                             <?php if (isset($field_types[$field])): ?>
-                                <select name="<?php echo $field; ?>" id="<?php echo $field; ?>">
+                                <select name="<?php echo htmlspecialchars($field); ?>" id="<?php echo htmlspecialchars($field); ?>">
                                     <?php foreach ($field_types[$field] as $option): ?>
-                                        <option value="<?php echo $option; ?>" <?php echo $value === $option ? 'selected' : ''; ?>>
-                                            <?php echo $option; ?>
+                                        <option value="<?php echo htmlspecialchars($option); ?>" <?php echo htmlspecialchars($value) === $option ? 'selected' : ''; ?>>
+                                            <?php echo htmlspecialchars($option); ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
                             <?php else: ?>
                                 <input type="<?php echo strpos($field, 'Data') === 0 ? 'datetime-local' : 'text'; ?>"
-                                       name="<?php echo $field; ?>"
-                                       id="<?php echo $field; ?>"
-                                       value="<?php echo htmlspecialchars($value); ?>">
+                                    name="<?php echo $field; ?>"
+                                    id="<?php echo $field; ?>"
+                                    value="<?php echo htmlspecialchars($value); ?>">
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>
@@ -154,4 +156,5 @@ $field_types = [
         &copy SwapMoto 2024 - Admin Panel
     </div>
 </body>
+
 </html>

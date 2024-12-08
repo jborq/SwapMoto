@@ -112,6 +112,6 @@ try {
     $_SESSION['admin_error'] = "Error deleting record: " . $e->getMessage();
 }
 
-header('Location: admin.php?table=' . $table);
+header('Location: admin.php?table=' . htmlspecialchars($table));
 exit();
 ?>
