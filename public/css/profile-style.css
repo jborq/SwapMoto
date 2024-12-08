@@ -71,6 +71,11 @@
     color: #2e7d32;
 }
 
+.status-badge.anulowana {
+    background-color: #fce4ec;
+    color: #c2185b;
+}
+
 .reservation-details {
     display: flex;
     gap: 40px;
