@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($original_email != $email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error_message = "Invalid email format";
     } else {
-        $query = "SELECT IDużytkownika, Hasło FROM Użytkownicy WHERE Email = ?";
+        $query = "SELECT IDużytkownika, Hasło, IDroli FROM Użytkownicy WHERE Email = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param('s', $email);
         $stmt->execute();
@@ -34,6 +34,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user = $result->fetch_assoc();
             if (password_verify($password, $user['Hasło'])) {
                 $_SESSION['user_id'] = $user['IDużytkownika'];
+                $_SESSION['IDroli'] = $user['IDroli'];
+
+                // Check if user is admin
+                if ($user['IDroli'] == 2) {
+                    header('Location: admin.php');
+                    exit();
+                }
 
                 // Restore user cart or create new one     
                 if (!isset($_SESSION['user_carts'])) {
