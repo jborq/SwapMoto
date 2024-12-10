@@ -13,6 +13,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_SESSION['rental_data'])) {
         $start_time = isset($_POST['start_time']) ? $_POST['start_time'] : '';
         $end_time = isset($_POST['end_time']) ? $_POST['end_time'] : '';
 
+        // Validate dates and times
+        if (strtotime($start_date) === false || strtotime($end_date) === false) {
+            $error_message = "Invalid date format";
+        } elseif (strtotime($start_time) === false || strtotime($end_time) === false) {
+            $error_message = "Invalid time format";
+        } elseif (strtotime($end_date) < strtotime($start_date)) {
+            $error_message = "End date cannot be earlier than start date";
+        } else {
+            $_SESSION['rental_data'] = [
+                'id_motocykla' => $id_motocykla,
+                'start_date' => $start_date,
+                'end_date' => $end_date,
+                'start_time' => $start_time,
+                'end_time' => $end_time
+            ];
+        }
+
         $_SESSION['rental_data'] = [
             'id_motocykla' => $id_motocykla,
             'start_date' => $start_date,

@@ -23,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Validate email
     if ($original_email != $email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error_message = "Invalid email format";
+    } else if (strlen($password) < 8 || !preg_match('/[A-Z]/', $password) || !preg_match('/[!@#$%^&*]/', $password)) {
+        $error_message = "Password must be at least 8 characters long";
     } else {
         $query = "SELECT IDużytkownika, Hasło, IDroli FROM Użytkownicy WHERE Email = ?";
         $stmt = $conn->prepare($query);

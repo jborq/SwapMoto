@@ -11,6 +11,18 @@ $user_id = $_SESSION['user_id'];
 $phone = !empty($_POST['phone']) ? htmlspecialchars(trim($_POST['phone'])) : null;
 $address = !empty($_POST['address']) ? htmlspecialchars(trim($_POST['address'])) : null;
 
+// Validate phone number
+if ($phone !== null && !preg_match('/^\d{9}$/', $phone)) {
+    header('Location: profile.php?error=1&message=' . urlencode('Invalid phone number format'));
+    exit();
+}
+
+// Validate address
+if ($address !== null && strlen($address) > 255) {
+    header('Location: profile.php?error=1&message=' . urlencode('Address is too long'));
+    exit();
+}
+
 try {
     $conn->begin_transaction();
 

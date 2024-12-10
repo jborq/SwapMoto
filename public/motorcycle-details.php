@@ -33,6 +33,41 @@ function formatPhoneNumber($phoneNumber)
 {
     return preg_replace('/(\d{3})(\d{3})(\d{3})/', '$1 $2 $3', $phoneNumber);
 }
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $start_date = $_POST['start_date'];
+    $end_date = $_POST['end_date'];
+    $start_time = $_POST['start_time'];
+    $end_time = $_POST['end_time'];
+
+    // Validate dates and times
+    if (strtotime($start_date) === false || strtotime($end_date) === false) {
+        $error_message = "Invalid date format";
+    } elseif (strtotime($start_time) === false || strtotime($end_time) === false) {
+        $error_message = "Invalid time format";
+    } elseif (strtotime($end_date) < strtotime($start_date)) {
+        $error_message = "End date cannot be earlier than start date";
+    } else {
+        $_SESSION['rental_data'] = [
+            'id_motocykla' => $id,
+            'start_date' => $start_date,
+            'end_date' => $end_date,
+            'start_time' => $start_time,
+            'end_time' => $end_time
+        ];
+
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = array();
+        }
+        $_SESSION['cart'][] = [
+            'id_motocykla' => $id,
+            'start_date' => $start_date,
+            'end_date' => $end_date,
+            'start_time' => $start_time,
+            'end_time' => $end_time
+        ];
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -148,28 +183,6 @@ function formatPhoneNumber($phoneNumber)
                 <p class="sub-text">(<?php echo htmlspecialchars($moto['Cena']); ?> zł per day)</p>
                 <hr>
                 <form action="checkout.php" method="post" id="rentForm">
-                    <?php
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                        $_SESSION['rental_data'] = [
-                            'id_motocykla' => $id,
-                            'start_date' => $_POST['start_date'],
-                            'end_date' => $_POST['end_date'],
-                            'start_time' => $_POST['start_time'],
-                            'end_time' => $_POST['end_time']
-                        ];
-
-                        if (!isset($_SESSION['cart'])) {
-                            $_SESSION['cart'] = array();
-                        }
-                        $_SESSION['cart'][] = [
-                            'id_motocykla' => $id,
-                            'start_date' => $_POST['start_date'],
-                            'end_date' => $_POST['end_date'],
-                            'start_time' => $_POST['start_time'],
-                            'end_time' => $_POST['end_time']
-                        ];
-                    }
-                    ?>
                     <input type="hidden" name="id_motocykla" value="<?php echo htmlspecialchars($id); ?>">
                     <div class="date">
                         <div class="start-date">
