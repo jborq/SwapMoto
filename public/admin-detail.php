@@ -28,6 +28,14 @@ if (!isset($primary_keys[$table])) {
 $primary_key = $primary_keys[$table];
 
 $query = "SELECT * FROM $table WHERE $primary_key = ?";
+
+if ($table === 'Użytkownicy') {
+    $query = "SELECT u.*, dk.Numer_telefonu, dk.Adres_zamieszkania 
+              FROM Użytkownicy u 
+              LEFT JOIN Dane_kontaktowe dk ON u.IDużytkownika = dk.IDużytkownika 
+              WHERE u.IDużytkownika = ?";
+}
+
 $stmt = $conn->prepare($query);
 $stmt->bind_param('i', $id);
 $stmt->execute();

@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $values = [];
 
         foreach ($_POST as $key => $value) {
-            if ($key !== 'submit' && $key !== $primary_key) {
+            if ($key !== 'submit' && $key !== $primary_key && $key !== 'Numer_telefonu' && $key !== 'Adres_zamieszkania') {
                 $fields[] = "`$key` = ?";
                 $types .= is_numeric($value) ? 'i' : 's';
                 $values[] = $value;
@@ -62,10 +62,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $types .= 'i';
         $values[] = $id;
 
-        $query = "UPDATE $table SET " . implode(', ', $fields) . " WHERE $primary_key = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param($types, ...$values);
-        $stmt->execute();
+        if (!empty($fields)) {
+            $query = "UPDATE $table SET " . implode(', ', $fields) . " WHERE $primary_key = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param($types, ...$values);
+            $stmt->execute();
+        }
+
+        // Update contact details if provided
+        $phone = $_POST['Numer_telefonu'] ?? '';
+        $address = $_POST['Adres_zamieszkania'] ?? '';
+
+        if (!empty($phone) || !empty($address)) {
+            $check_query = "SELECT IDdanych FROM Dane_kontaktowe WHERE IDużytkownika = ?";
+            $stmt = $conn->prepare($check_query);
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                $query = "UPDATE Dane_kontaktowe SET Numer_telefonu = ?, Adres_zamieszkania = ? WHERE IDużytkownika = ?";
+            } else {
+                $query = "INSERT INTO Dane_kontaktowe (Numer_telefonu, Adres_zamieszkania, IDużytkownika) VALUES (?, ?, ?)";
+            }
+
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param('ssi', $phone, $address, $id);
+            $stmt->execute();
+        }
 
         $conn->commit();
         $_SESSION['admin_success'] = "Record updated successfully";
@@ -79,6 +103,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Get record data
 $query = "SELECT * FROM $table WHERE $primary_key = ?";
+
+if ($table === 'Użytkownicy') {
+    $query = "SELECT u.*, dk.Numer_telefonu, dk.Adres_zamieszkania 
+              FROM Użytkownicy u 
+              LEFT JOIN Dane_kontaktowe dk ON u.IDużytkownika = dk.IDużytkownika 
+              WHERE u.IDużytkownika = ?";
+}
+
 $stmt = $conn->prepare($query);
 $stmt->bind_param('i', $id);
 $stmt->execute();
