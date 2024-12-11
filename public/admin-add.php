@@ -44,6 +44,22 @@ $table_fields = [
         'Email' => 'email',
         'Hasło' => 'password'
     ],
+    'Rezerwacje' => [
+        'IDużytkownika' => 'number',
+        'IDmotocykla' => 'number',
+        'Status_rezerwacji' => ['trwa', 'zrealizowana', 'anulowana'],
+        'Data_rozpoczęcia' => 'datetime-local',
+        'Data_zakończenia' => 'datetime-local',
+        'Godzina_odbioru' => 'time',
+        'Godzina_oddania' => 'time',
+        'Imię_kierowcy' => 'text',
+        'Nazwisko_kierowcy' => 'text',
+        'Email_kierowcy' => 'email',
+        'Telefon_kierowcy' => 'tel',
+        'Data_urodzenia_kierowcy' => 'date',
+        'Kategoria_prawa_jazdy' => ['A', 'A1', 'A2', 'B'],
+        'Całkowita_cena' => 'number'
+    ],
     'Lokalizacje' => [
         'Oddział' => 'text',
         'Miasto' => 'text',
@@ -75,6 +91,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($key !== 'submit' && !empty($value)) {
                 $fields[] = "`$key`";
                 $placeholders[] = "?";
+
+                // Handle password encryption
+                if ($table === 'Użytkownicy' && $key === 'Hasło') {
+                    $value = password_hash($value, PASSWORD_DEFAULT);
+                }
+
                 $types .= is_numeric($value) ? 'i' : 's';
                 $values[] = $value;
             }
@@ -113,12 +135,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <title>Add New Record - SwapMoto Admin</title>
     <link rel="stylesheet" href="./css/admin-style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./css/navbar-footer.css?v=<?php echo time(); ?>">
 </head>
+
 <body>
     <?php include '../partials/navbar.php'; ?>
     <div class="admin-container">
@@ -138,10 +162,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <?php elseif ($type === 'textarea'): ?>
                                 <textarea name="<?php echo $field; ?>" id="<?php echo $field; ?>" required></textarea>
                             <?php else: ?>
-                                <input type="<?php echo $type; ?>" 
-                                       name="<?php echo $field; ?>" 
-                                       id="<?php echo $field; ?>" 
-                                       required>
+                                <input type="<?php echo $type; ?>"
+                                    name="<?php echo $field; ?>"
+                                    id="<?php echo $field; ?>"
+                                    <?php if ($type === 'tel'): ?>
+                                    pattern="\d{9}"
+                                    title="Phone number must be 9 digits"
+                                    <?php elseif ($type === 'email'): ?>
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                    title="Enter a valid email address"
+                                    <?php elseif ($type === 'password'): ?>
+                                    minlength="8"
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}"
+                                    title="Must contain at least 8 characters, one uppercase, one lowercase, one number and one special character"
+                                    <?php elseif ($type === 'number' && $field === 'Całkowita_cena'): ?>
+                                    step="0.01"
+                                    min="0"
+                                    <?php endif; ?>
+                                    required>
                             <?php endif; ?>
                         </div>
                     <?php endforeach; ?>
@@ -159,4 +197,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         &copy SwapMoto 2024 - Admin Panel
     </div>
 </body>
+
 </html>
