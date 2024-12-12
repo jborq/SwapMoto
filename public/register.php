@@ -6,12 +6,12 @@ $error_message = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Sanitize input data
-    $original_email = $_POST['email'];
+    $original_email = trim($_POST['email']);
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $firstName = htmlspecialchars(trim($_POST['first_name']));
     $lastName = htmlspecialchars(trim($_POST['last_name']));
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
+    $password = trim($_POST['password']);
+    $confirm_password = trim($_POST['confirm_password']);
 
     // Validate email
     if ($original_email != $email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {

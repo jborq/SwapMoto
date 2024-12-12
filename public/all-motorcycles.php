@@ -4,13 +4,13 @@ session_start();
 
 $base_path = '..';
 
-$location = isset($_GET['location']) ? $_GET['location'] : '';
-$type = isset($_GET['type']) ? $_GET['type'] : '';
-$license = isset($_GET['license']) ? $_GET['license'] : '';
-$brand = isset($_GET['brand']) ? $_GET['brand'] : '';
-$minPrice = isset($_GET['min-price']) ? $_GET['min-price'] : 0;
-$maxPrice = isset($_GET['max-price']) ? $_GET['max-price'] : 500;
-$sort = isset($_GET['sort']) ? $_GET['sort'] : 'most-recomended';
+$location = trim($_GET['location'] ?? '');
+$type = trim($_GET['type'] ?? '');
+$license = trim($_GET['license'] ?? '');
+$brand = trim($_GET['brand'] ?? '');
+$minPrice = trim($_GET['min-price'] ?? 0);
+$maxPrice = trim($_GET['max-price'] ?? 500);
+$sort = trim($_GET['sort'] ?? 'most-recommended');
 
 $query = "SELECT IDmotocykla, Motocykle.Marka, Motocykle.Model, Motocykle.Cena, Motocykle.Zdjęcie, Lokalizacje.Miasto 
           FROM Motocykle 

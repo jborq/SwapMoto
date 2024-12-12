@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($key !== 'submit' && $key !== $primary_key && $key !== 'Numer_telefonu' && $key !== 'Adres_zamieszkania') {
                 $fields[] = "`$key` = ?";
                 $types .= is_numeric($value) ? 'i' : 's';
-                $values[] = $value;
+                $values[] = trim($value);
             }
         }
 

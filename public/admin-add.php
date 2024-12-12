@@ -91,6 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($key !== 'submit' && !empty($value)) {
                 $fields[] = "`$key`";
                 $placeholders[] = "?";
+                $value = trim($value);
 
                 // Handle password encryption
                 if ($table === 'Użytkownicy' && $key === 'Hasło') {

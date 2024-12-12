@@ -10,9 +10,9 @@ if (isset($_GET['registration']) && $_GET['registration'] === 'success') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $original_email = $_POST['email'];
+    $original_email = trim($_POST['email']);
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-    $password = $_POST['password'];
+    $password = trim($_POST['password']);
 
     // Redirect to previous page or index if previous page is login or register
     $redirect_url = isset($_POST['redirect_url']) ? $_POST['redirect_url'] : '../index.php';
