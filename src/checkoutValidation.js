@@ -18,22 +18,31 @@ document.addEventListener('DOMContentLoaded', function() {
         errors[key] = document.getElementById(`${key}Error`) || createErrorElement(fields[key]);
     });
 
+    // Validation patterns
+    const patterns = {
+        name: /^[A-Za-z0-9\s]+$/,
+        email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        phone: /^\d{9}$/,
+        cardNumber: /^[0-9]{16}$/,
+        cvv: /^[0-9]{3,4}$/,
+        expiryDate: /^(0[1-9]|1[0-2])\/([0-9]{2})$/
+    };
+
     const errorMessages = {
         firstName: {
             valueMissing: 'First name is required',
-            patternMismatch: 'Please enter a valid name'
+            invalidFormat: 'First name can only contain letters'
         },
         lastName: {
             valueMissing: 'Last name is required',
-            patternMismatch: 'Please enter a valid name'
+            invalidFormat: 'Last name can only contain letters'
         },
         email: {
             valueMissing: 'Email is required',
-            typeMismatch: 'Please enter a valid email address'
+            invalidFormat: 'Please enter a valid email address'
         },
         phone: {
-            valueMissing: 'Phone number is required',
-            patternMismatch: 'Please enter a valid phone number'
+            invalidFormat: 'If provided, phone number must be 9 digits'
         },
         dob: {
             valueMissing: 'Date of birth is required',
@@ -41,21 +50,187 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         cardNumber: {
             valueMissing: 'Card number is required',
-            patternMismatch: 'Please enter a valid 16-digit card number'
+            invalidFormat: 'Please enter a valid 16-digit card number'
         },
         cardHolder: {
             valueMissing: 'Card holder name is required',
-            patternMismatch: 'Please enter a valid name'
+            invalidFormat: 'Please enter a valid name'
         },
         expiryDate: {
             valueMissing: 'Expiry date is required',
-            invalid: 'Please enter a valid future date'
+            invalidFormat: 'Please enter a valid expiry date (MM/YY)',
+            invalid: 'Card has expired'
         },
         cvv: {
             valueMissing: 'CVV is required',
-            patternMismatch: 'Please enter a valid 3 or 4 digit CVV'
+            invalidFormat: 'Please enter a valid 3 or 4 digit CVV'
         }
     };
+
+    function validateName(value, errorElement, type) {
+        if (!value) {
+            errorElement.textContent = errorMessages[type].valueMissing;
+            errorElement.style.display = 'block';
+            return false;
+        }
+        if (!patterns.name.test(value)) {
+            errorElement.textContent = errorMessages[type].invalidFormat;
+            errorElement.style.display = 'block';
+            return false;
+        }
+        errorElement.style.display = 'none';
+        return true;
+    }
+
+    function validateEmail(value) {
+        if (!value) {
+            errors.email.textContent = errorMessages.email.valueMissing;
+            errors.email.style.display = 'block';
+            return false;
+        }
+        if (!patterns.email.test(value)) {
+            errors.email.textContent = errorMessages.email.invalidFormat;
+            errors.email.style.display = 'block';
+            return false;
+        }
+        errors.email.style.display = 'none';
+        return true;
+    }
+
+    function validatePhone(value) {
+        if (!value) {
+            errors.phone.style.display = 'none';
+            return true; // Phone is optional
+        }
+        if (!patterns.phone.test(value)) {
+            errors.phone.textContent = errorMessages.phone.invalidFormat;
+            errors.phone.style.display = 'block';
+            return false;
+        }
+        errors.phone.style.display = 'none';
+        return true;
+    }
+
+    function validateDOB(value) {
+        if (!value) {
+            errors.dob.textContent = errorMessages.dob.valueMissing;
+            errors.dob.style.display = 'block';
+            return false;
+        }
+        const birthDate = new Date(value);
+        const today = new Date();
+        const age = today.getFullYear() - birthDate.getFullYear();
+        if (age < 13) {
+            errors.dob.textContent = errorMessages.dob.underAge;
+            errors.dob.style.display = 'block';
+            return false;
+        }
+        errors.dob.style.display = 'none';
+        return true;
+    }
+
+    function validateExpiryDate(value) {
+        if (!value) {
+            errors.expiryDate.textContent = errorMessages.expiryDate.valueMissing;
+            errors.expiryDate.style.display = 'block';
+            return false;
+        }
+    
+        if (!patterns.expiryDate.test(value)) {
+            errors.expiryDate.textContent = errorMessages.expiryDate.invalidFormat;
+            errors.expiryDate.style.display = 'block';
+            return false;
+        }
+    
+        const [month, yearStr] = value.split('/');
+        const year = parseInt(yearStr, 10);
+        const currentDate = new Date();
+        const currentYear = currentDate.getFullYear() % 100;
+        const currentMonth = currentDate.getMonth() + 1;
+    
+        // Compare years and months
+        if (year < currentYear || (year === currentYear && parseInt(month) <= currentMonth)) {
+            errors.expiryDate.textContent = errorMessages.expiryDate.invalid;
+            errors.expiryDate.style.display = 'block';
+            return false;
+        }
+    
+        errors.expiryDate.style.display = 'none';
+        return true;
+    }
+
+    function validateCardNumber(value) {
+        if (!value) {
+            errors.cardNumber.textContent = errorMessages.cardNumber.valueMissing;
+            errors.cardNumber.style.display = 'block';
+            return false;
+        }
+        if (!patterns.cardNumber.test(value)) {
+            errors.cardNumber.textContent = errorMessages.cardNumber.invalidFormat;
+            errors.cardNumber.style.display = 'block';
+            return false;
+        }
+        errors.cardNumber.textContent = '';
+        errors.cardNumber.style.display = 'none';
+        return true;
+    }
+    
+    function validateCardHolder(value) {
+        if (!value) {
+            errors.cardHolder.textContent = errorMessages.cardHolder.valueMissing;
+            errors.cardHolder.style.display = 'block';
+            return false;
+        }
+        if (!patterns.name.test(value)) {
+            errors.cardHolder.textContent = errorMessages.cardHolder.invalidFormat;
+            errors.cardHolder.style.display = 'block';
+            return false;
+        }
+        errors.cardHolder.textContent = '';
+        errors.cardHolder.style.display = 'none';
+        return true;
+    }
+    
+    function validateCVV(value) {
+        if (!value) {
+            errors.cvv.textContent = errorMessages.cvv.valueMissing;
+            errors.cvv.style.display = 'block';
+            return false;
+        }
+        if (!patterns.cvv.test(value)) {
+            errors.cvv.textContent = errorMessages.cvv.invalidFormat;
+            errors.cvv.style.display = 'block';
+            return false;
+        }
+        errors.cvv.textContent = '';
+        errors.cvv.style.display = 'none';
+        return true;
+    }
+    
+    function validateCardDetails() {
+        const isCardNumberValid = validateCardNumber(fields.cardNumber.value.trim());
+        const isCardHolderValid = validateCardHolder(fields.cardHolder.value.trim());
+        const isExpiryDateValid = validateExpiryDate(fields.expiryDate.value.trim());
+        const isCVVValid = validateCVV(fields.cvv.value.trim());
+    
+        return isCardNumberValid && isCardHolderValid && isExpiryDateValid && isCVVValid;
+    }
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+    
+        const isFirstNameValid = validateName(fields.firstName.value.trim(), errors.firstName, 'firstName');
+        const isLastNameValid = validateName(fields.lastName.value.trim(), errors.lastName, 'lastName');
+        const isEmailValid = validateEmail(fields.email.value.trim());
+        const isPhoneValid = validatePhone(fields.phone.value.trim());
+        const isDOBValid = validateDOB(fields.dob.value);
+        const areCardDetailsValid = validateCardDetails();
+    
+        if (isFirstNameValid && isLastNameValid && isEmailValid && 
+            isPhoneValid && isDOBValid && areCardDetailsValid) {
+            this.submit();
+        }
+    });
 
     function createErrorElement(field) {
         const error = document.createElement('div');
@@ -63,197 +238,4 @@ document.addEventListener('DOMContentLoaded', function() {
         field.parentNode.appendChild(error);
         return error;
     }
-
-    // Format first name as user types
-    fields.firstName.addEventListener('input', function(e) {
-        e.target.value = e.target.value.replace(/[^a-zA-Z]/g, '');
-        if (fields.firstName.validity.valueMissing) {
-            errors.firstName.textContent = errorMessages.firstName.valueMissing;
-            errors.firstName.style.display = 'block';
-        } else {
-            errors.firstName.textContent = '';
-            errors.firstName.style.display = 'none';
-        }
-    });
-
-    // Format last name as user types
-    fields.lastName.addEventListener('input', function(e) {
-        e.target.value = e.target.value.replace(/[^a-zA-Z]/g, '');
-        if (fields.lastName.validity.valueMissing) {
-            errors.lastName.textContent = errorMessages.lastName.valueMissing;
-            errors.lastName.style.display = 'block';
-        } else {
-            errors.lastName.textContent = '';
-            errors.lastName.style.display = 'none';
-        }
-    });
-
-    // Format email as user types
-    fields.email.addEventListener('input', function(e) {
-        e.target.value = e.target.value.toLowerCase();
-        if (fields.email.validity.valueMissing) {
-            errors.email.textContent = errorMessages.email.valueMissing;
-            errors.email.style.display = 'block';
-        } else if (!fields.email.validity.valid) {
-            errors.email.textContent = errorMessages.email.typeMismatch;
-            errors.email.style.display = 'block';
-        } else {
-            errors.email.textContent = '';
-            errors.email.style.display = 'none';
-        }
-    });
-
-    // Format phone number as user types
-    fields.phone.addEventListener('input', function(e) {
-        e.target.value = e.target.value.replace(/\D/g, '').substring(0,9);
-        if (fields.phone.validity.valueMissing) {
-            errors.phone.textContent = errorMessages.phone.valueMissing;
-            errors.phone.style.display = 'block';
-        } else if (!fields.phone.validity.valid) {
-            errors.phone.textContent = errorMessages.phone.patternMismatch;
-            errors.phone.style.display = 'block';
-        } else {
-            errors.phone.textContent = '';
-            errors.phone.style.display = 'none';
-        }
-    });
-
-    // Format card number as user types
-    fields.cardNumber.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, '').substring(0,16);
-        let formattedValue = '';
-        for(let i = 0; i < value.length; i++) {
-            if(i > 0 && i % 4 === 0) {
-                formattedValue += ' ';
-            }
-            formattedValue += value[i];
-        }
-        e.target.value = formattedValue;
-    });
-
-    // Format expiry date as user types
-    fields.expiryDate.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, '');
-        if (value.length > 2) {
-            value = value.substring(0,2) + '/' + value.substring(2,4);
-        }
-        e.target.value = value;
-    });
-    
-
-    // Validate date of birth
-    fields.dob.addEventListener('change', function() {
-        const birthDate = new Date(this.value);
-        const today = new Date();
-        const age = today.getFullYear() - birthDate.getFullYear();
-        const monthDiff = today.getMonth() - birthDate.getMonth();
-        
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-        }
-
-        if (age < 13) {
-            errors.dob.textContent = errorMessages.dob.underAge;
-            errors.dob.style.display = 'block';
-        } else {
-            errors.dob.style.display = 'none';
-        }
-    });
-
-    // Validate expiry date
-    fields.expiryDate.addEventListener('change', function() {
-        const [month, year] = this.value.split('/');
-        const expiry = new Date(2000 + parseInt(year), parseInt(month) - 1);
-        const today = new Date();
-        
-        if (expiry < today) {
-            errors.expiryDate.textContent = errorMessages.expiryDate.invalid;
-            errors.expiryDate.style.display = 'block';
-        } else {
-            errors.expiryDate.style.display = 'none';
-        }
-    });
-
-    // Validate card number
-    fields.cardNumber.addEventListener('input', function() {
-        if (fields.cardNumber.validity.valueMissing) {
-            errors.cardNumber.textContent = errorMessages.cardNumber.valueMissing;
-            errors.cardNumber.style.display = 'block';
-        } else if (!fields.cardNumber.validity.valid) {
-            errors.cardNumber.textContent = errorMessages.cardNumber.patternMismatch;
-            errors.cardNumber.style.display = 'block';
-        } else {
-            errors.cardNumber.textContent = '';
-            errors.cardNumber.style.display = 'none';
-        }
-    });
-
-    // Validate CVV
-    fields.cvv.addEventListener('input', function() {
-        if (fields.cvv.validity.valueMissing) {
-            errors.cvv.textContent = errorMessages.cvv.valueMissing;
-            errors.cvv.style.display = 'block';
-        } else if (!fields.cvv.validity.valid) {
-            errors.cvv.textContent = errorMessages.cvv.patternMismatch;
-            errors.cvv.style.display = 'block';
-        } else {
-            errors.cvv.textContent = '';
-            errors.cvv.style.display = 'none';
-        }
-    });
-
-    // Validate card holder name
-    fields.cardHolder.addEventListener('input', function(e) {
-        if (fields.cardHolder.validity.valueMissing) {
-            errors.cardHolder.textContent = errorMessages.cardHolder.valueMissing;
-            errors.cardHolder.style.display = 'block';
-        } else {
-            errors.cardHolder.textContent = '';
-            errors.cardHolder.style.display = 'none';
-        }
-    });
-
-    form.addEventListener('submit', function(event) {
-        let isValid = true;
-
-        // Validate all fields
-        Object.keys(fields).forEach(key => {
-            const field = fields[key];
-            if (!field.checkValidity()) {
-                isValid = false;
-                errors[key].textContent = field.validity.valueMissing ? 
-                    errorMessages[key].valueMissing : 
-                    errorMessages[key].patternMismatch;
-                errors[key].style.display = 'block';
-            }
-        });
-
-        // Additional date of birth validation
-        const birthDate = new Date(fields.dob.value);
-        const today = new Date();
-        const age = today.getFullYear() - birthDate.getFullYear();
-        if (age < 13) {
-            isValid = false;
-            errors.dob.textContent = errorMessages.dob.underAge;
-            errors.dob.style.display = 'block';
-        }
-
-        // Additional expiry date validation
-        const [month, year] = fields.expiryDate.value.split('/');
-        const expiry = new Date(2000 + parseInt(year), parseInt(month) - 1);
-        if (parseInt(month) < 1 || parseInt(month) > 12) {
-            isValid = false;
-            errors.expiryDate.textContent = errorMessages.expiryDate.invalid;
-            errors.expiryDate.style.display = 'block';
-        } else if (expiry < today) {
-            isValid = false;
-            errors.expiryDate.textContent = errorMessages.expiryDate.invalid;
-            errors.expiryDate.style.display = 'block';
-        }
-
-
-        if (!isValid) {
-            event.preventDefault();
-        }
-    });
 });

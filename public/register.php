@@ -18,11 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error_message = "Invalid email format";
     }
     // Validate first name
-    elseif (empty($firstName) || !preg_match('/^[A-Za-z\s-]+$/', $firstName)) {
+    elseif (empty($firstName) || !preg_match('/^[A-Za-z0-9]+$/', $firstName)) {
         $error_message = "Please enter a valid first name";
     }
     // Validate last name
-    elseif (empty($lastName) || !preg_match('/^[A-Za-z\s-]+$/', $lastName)) {
+    elseif (empty($lastName) || !preg_match('/^[A-Za-z0-9]+$/', $lastName)) {
         $error_message = "Please enter a valid last name";
     }
     // Check password strength

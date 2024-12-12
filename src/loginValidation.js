@@ -5,51 +5,59 @@ document.addEventListener('DOMContentLoaded', function() {
     const emailError = document.getElementById('emailError');
     const passwordError = document.getElementById('passwordError');
 
+    // Validation patterns
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
+
     const errorMessages = {
         email: {
             valueMissing: 'Email is required',
-            typeMismatch: 'Please enter a valid email address'
+            invalidFormat: 'Please enter a valid email address'
         },
         password: {
             valueMissing: 'Password is required',
-            tooShort: 'Password must be at least 8 characters long',
+            invalidFormat: 'Password must contain at least 8 characters, one uppercase letter and one special character'
         }
     };
 
-    // Hide error messages for email
-    email.addEventListener('input', function() {
-        if (!email.validity.valid) {
-            emailError.textContent = email.validity.valueMissing ? 
-                errorMessages.email.valueMissing : errorMessages.email.typeMismatch;
+    function validateEmail(email) {
+        if (!email) {
+            emailError.textContent = errorMessages.email.valueMissing;
             emailError.style.display = 'block';
-        } else {
-            emailError.textContent = '';
-            emailError.style.display = 'none';
+            return false;
         }
-    });
+        if (!emailPattern.test(email)) {
+            emailError.textContent = errorMessages.email.invalidFormat;
+            emailError.style.display = 'block';
+            return false;
+        }
+        emailError.style.display = 'none';
+        return true;
+    }
 
-    // Hide error messages for password
-    password.addEventListener('input', function() {
-        if (!password.validity.valid) {
-            passwordError.textContent = password.validity.valueMissing ? 
-                errorMessages.password.valueMissing : errorMessages.password.tooShort;
+    function validatePassword(password) {
+        if (!password) {
+            passwordError.textContent = errorMessages.password.valueMissing;
             passwordError.style.display = 'block';
-        } else {
-            passwordError.textContent = '';
-            passwordError.style.display = 'none';
+            return false;
         }
-    });
+        if (!passwordPattern.test(password)) {
+            passwordError.textContent = errorMessages.password.invalidFormat;
+            passwordError.style.display = 'block';
+            return false;
+        }
+        passwordError.style.display = 'none';
+        return true;
+    }
 
     form.addEventListener('submit', function(event) {
-        let isValid = true;
+        event.preventDefault();
 
-        if (!email.validity.valid || !password.validity.valid) {
-            isValid = false;
-            event.preventDefault();
-        }
+        const isEmailValid = validateEmail(email.value.trim());
+        const isPasswordValid = validatePassword(password.value);
 
-        if (isValid) {
-            return true;
+        if (isEmailValid && isPasswordValid) {
+            this.submit();
         }
     });
 });

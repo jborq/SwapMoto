@@ -185,8 +185,8 @@ if ($start_date && $end_date) {
                                     id="card_number"
                                     name="card_number"
                                     required
-                                    pattern="\d{4}\s\d{4}\s\d{4}\s\d{4}"
-                                    maxlength="19">
+                                    pattern="[0-9]{16}"
+                                    maxlength="16">
                                 <div class="validation-message" id="cardNumberError"></div>
                             </div>
                             <div class="form-group">

@@ -12,22 +12,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const passwordError = document.getElementById('passwordError');
     const confirmPasswordError = document.getElementById('confirmPasswordError');
 
+    // Validation patterns
+    const namePattern = /^[A-Za-z0-9]+$/;
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
+
     const errorMessages = {
         firstName: {
             valueMissing: 'First name is required',
-            patternMismatch: 'First name can only contain letters'
+            invalidFormat: 'First name can only contain letters'
         },
         lastName: {
             valueMissing: 'Last name is required',
-            patternMismatch: 'Last name can only contain letters'
+            invalidFormat: 'Last name can only contain letters'
         },
         email: {
             valueMissing: 'Email is required',
-            typeMismatch: 'Please enter a valid email address'
+            invalidFormat: 'Please enter a valid email address'
         },
         password: {
             valueMissing: 'Password is required',
-            patternMismatch: 'Password must contain at least 8 characters, one uppercase letter and one special character'
+            invalidFormat: 'Password must contain at least 8 characters, one uppercase letter and one special character'
         },
         confirmPassword: {
             valueMissing: 'Please confirm your password',
@@ -35,82 +40,78 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // First name validation
-    firstName.addEventListener('input', function() {
-        if (!firstName.validity.valid) {
-            firstNameError.textContent = firstName.validity.valueMissing ? 
-                errorMessages.firstName.valueMissing : errorMessages.firstName.patternMismatch;
-            firstNameError.style.display = 'block';
-        } else {
-            firstNameError.textContent = '';
-            firstNameError.style.display = 'none';
+    function validateName(name, errorElement, type) {
+        if (!name) {
+            errorElement.textContent = errorMessages[type].valueMissing;
+            errorElement.style.display = 'block';
+            return false;
         }
-    });
-
-    // Last name validation
-    lastName.addEventListener('input', function() {
-        if (!lastName.validity.valid) {
-            lastNameError.textContent = lastName.validity.valueMissing ? 
-                errorMessages.lastName.valueMissing : errorMessages.lastName.patternMismatch;
-            lastNameError.style.display = 'block';
-        } else {
-            lastNameError.textContent = '';
-            lastNameError.style.display = 'none';
+        if (!namePattern.test(name)) {
+            errorElement.textContent = errorMessages[type].invalidFormat;
+            errorElement.style.display = 'block';
+            return false;
         }
-    });
+        errorElement.style.display = 'none';
+        return true;
+    }
 
-    // Email validation
-    email.addEventListener('input', function() {
-        if (!email.validity.valid) {
-            emailError.textContent = email.validity.valueMissing ? 
-                errorMessages.email.valueMissing : errorMessages.email.typeMismatch;
+    function validateEmail(email) {
+        if (!email) {
+            emailError.textContent = errorMessages.email.valueMissing;
             emailError.style.display = 'block';
-        } else {
-            emailError.textContent = '';
-            emailError.style.display = 'none';
+            return false;
         }
-    });
+        if (!emailPattern.test(email)) {
+            emailError.textContent = errorMessages.email.invalidFormat;
+            emailError.style.display = 'block';
+            return false;
+        }
+        emailError.style.display = 'none';
+        return true;
+    }
 
-    // Password validation
-    password.addEventListener('input', function() {
-        if (!password.validity.valid) {
-            passwordError.textContent = password.validity.valueMissing ? 
-                errorMessages.password.valueMissing : errorMessages.password.patternMismatch;
+    function validatePassword(password) {
+        if (!password) {
+            passwordError.textContent = errorMessages.password.valueMissing;
             passwordError.style.display = 'block';
-        } else {
-            passwordError.textContent = '';
-            passwordError.style.display = 'none';
+            return false;
         }
-    });
+        if (!passwordPattern.test(password)) {
+            passwordError.textContent = errorMessages.password.invalidFormat;
+            passwordError.style.display = 'block';
+            return false;
+        }
+        passwordError.style.display = 'none';
+        return true;
+    }
 
-    // Confirm password validation
-    confirmPassword.addEventListener('input', function() {
-        if (confirmPassword.validity.valueMissing) {
+    function validateConfirmPassword(password, confirmPass) {
+        if (!confirmPass) {
             confirmPasswordError.textContent = errorMessages.confirmPassword.valueMissing;
             confirmPasswordError.style.display = 'block';
-        } else if (password.value !== confirmPassword.value) {
+            return false;
+        }
+        if (password !== confirmPass) {
             confirmPasswordError.textContent = errorMessages.confirmPassword.mismatch;
             confirmPasswordError.style.display = 'block';
-        } else {
-            confirmPasswordError.textContent = '';
-            confirmPasswordError.style.display = 'none';
+            return false;
         }
-    });
+        confirmPasswordError.style.display = 'none';
+        return true;
+    }
 
-    // Form submission
     form.addEventListener('submit', function(event) {
-        let isValid = true;
+        event.preventDefault();
 
-        if (!firstName.validity.valid || !lastName.validity.valid || 
-            !email.validity.valid || !password.validity.valid || 
-            !confirmPassword.validity.valid || 
-            password.value !== confirmPassword.value) {
-            isValid = false;
-            event.preventDefault();
-        }
+        const isFirstNameValid = validateName(firstName.value.trim(), firstNameError, 'firstName');
+        const isLastNameValid = validateName(lastName.value.trim(), lastNameError, 'lastName');
+        const isEmailValid = validateEmail(email.value.trim());
+        const isPasswordValid = validatePassword(password.value);
+        const isConfirmPasswordValid = validateConfirmPassword(password.value, confirmPassword.value);
 
-        if (isValid) {
-            return true;
+        if (isFirstNameValid && isLastNameValid && isEmailValid && 
+            isPasswordValid && isConfirmPasswordValid) {
+            this.submit();
         }
     });
 });
