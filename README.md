@@ -14,3 +14,11 @@ SwapMoto is a web application built with PHP, MySQL, and JavaScript that allows 
 *   **Image Uploads:** The application allows administrators to upload images of motorcycles directory.
 
 ![image](https://github.com/user-attachments/assets/9d44ba84-573b-423c-a882-3ec001b4c8ae)
+
+![image](https://github.com/user-attachments/assets/72461e44-ce0c-4a29-ab09-e55d14c692d8)
+
+![image](https://github.com/user-attachments/assets/3243a91a-ee37-42a4-998a-afcfa6774a46)
+
+![image](https://github.com/user-attachments/assets/80bbc7cf-3584-4977-ac02-c66a487f3959)
+
+
